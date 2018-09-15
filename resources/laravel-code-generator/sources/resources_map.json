@@ -1,0 +1,123 @@
+[
+    {
+        "model-name": "AssetCategory",
+        "fields-file": "asset_categories.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Brand",
+        "fields-file": "brands.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Check",
+        "fields-file": "checks.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "CreditPayment",
+        "fields-file": "credit_payments.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Credit",
+        "fields-file": "credits.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Customer",
+        "fields-file": "customers.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "ExpenseCategory",
+        "fields-file": "expense_categories.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Expense",
+        "fields-file": "expenses.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "MaintenanceCategory",
+        "fields-file": "maintenance_categories.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "MaintenanceRecord",
+        "fields-file": "maintenance_records.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "PayableCheck",
+        "fields-file": "payable_checks.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "ReservationDriver",
+        "fields-file": "reservation_drivers.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Reservation",
+        "fields-file": "reservations.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Vehicle",
+        "fields-file": "vehicles.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "VehicleSize",
+        "fields-file": "vehicle_sizes.json",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "Asset",
+        "fields-file": "assets.json",
+        "table-name": "assets",
+        "with-auth": true,
+        "with-soft-delete": true,
+        "with-form-request": true
+    },
+    {
+        "model-name": "ReservationToDriver",
+        "resource-file": "reservation_to_drivers.json"
+    },
+    {
+        "model-name": "ReservationToCredit",
+        "resource-file": "reservation_to_credits.json"
+    }
+]

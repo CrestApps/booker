@@ -1,0 +1,20 @@
+{
+  "name": "booker",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Mike Alhayek <mike@crestapps.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+  }
+}

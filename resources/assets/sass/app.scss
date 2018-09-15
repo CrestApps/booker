@@ -1,0 +1,309 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import '~jquery-ui/themes/base/all.css';
+
+@import "bower_components/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker-build.scss";
+
+body {
+    padding-top: 50px;
+    padding-bottom: 0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column.
+   Also, add a 8pm to the bottom margin
+*/
+.dl-horizontal dt {
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea,
+.uploaded-file-group,
+.input-max-width {
+    max-width: 380px;
+}
+
+
+.input-delete-container {
+    width: 46px !important;
+}
+
+/* Vertically align the table cells inside body-panel */
+.panel-body .table > tr > td
+{
+    vertical-align: middle;
+}
+
+.panel-body-with-table
+{
+    padding: 0;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+
+.mb-0 {
+    margin-bottom: 0px !important;
+}
+
+.mb-2 {
+    margin-bottom: 2px !important;
+}
+
+.mt-7 {
+    margin-top: 7px !important;
+}
+
+.mt-15 {
+    margin-top: 15px !important;
+}
+
+.pt-3 {
+    padding-top: 3px !important;
+}
+
+.pr-3 {
+    padding-right: 3px !important;
+}
+
+.pb-3 {
+    padding-bottom: 3px !important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.pl-1 {
+    padding-left: 1px !important;
+}
+.pl-2 {
+    padding-left: 2px !important;
+}
+
+.pl-3 {
+    padding-left: 3px !important;
+}
+
+.pl-5 {
+    padding-left: 5px !important;
+}
+
+.alert .dl-horizontal {
+    margin-bottom: 0 !important;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.pr-1 {
+    padding-right: 1px !important;
+}
+.pr-2 {
+    padding-right: 2px !important;
+}
+
+.pr-5 {
+    padding-right: 5px !important;
+}
+
+.width-400 {
+    width: 400px;
+}
+
+.width-500 {
+    width: 500px;
+}
+
+.width-550 {
+    width: 550px;
+}
+
+.width-600 {
+    width: 600px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#wrapper.toggled.flip {
+    padding-left: 0 !important;
+    padding-right: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #fff;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    border-width: 0;
+    border-right-width: 1px;
+    border-style: solid;
+    border-color: #D3E0E9;
+}
+
+#sidebar-wrapper.flip {
+    margin-left: 0 !important;
+    margin-right: -250px;
+    left: 0 !important;
+    right: 250px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding-top: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+#wrapper.toggled #page-content-wrapper.flip {
+    margin-right: 0 !important;
+    margin-left: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #000;
+    background: #D3E0E9;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    background: none;
+    color: #999999;
+    cursor: auto;
+}
+
+.dl-horizontal-condensed dt {
+    margin-bottom: 0 !important;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 0;
+    }
+
+    #wrapper.toggled {
+        padding-left: 250px;
+    }
+
+    #sidebar-wrapper {
+        width: 0;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
+    /*
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+    */
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
