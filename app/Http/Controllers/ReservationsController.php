@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationsFormRequest;
 use App\Models\Customer;
 use App\Models\Reservation;
+use App\Models\ReservationToDriver;
 use App\Models\Vehicle;
 use Carbon\Carbon;
+use DB;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -51,17 +53,27 @@ class ReservationsController extends Controller
     public function store(ReservationsFormRequest $request)
     {
         try {
-
             $data = $request->validated();
-            $from = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_from']);
-            $to = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_to']);
-            $totalDays = $from->diffInDays($to) ?: 1;
-            $rate = $this->getRate($data['vehicle_id'], $totalDays);
-            $totalRent = $rate * $totalDays + doubleval($data['total_override']);
+            DB::transaction(function () use ($data) {
 
-            $reservation = Reservation::make($from, $to, $data['primary_driver_id'], $data['vehicle_id'], $data['total_override'], $totalDays, $totalRent);
+                $from = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_from']);
+                $to = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_to']);
+                $totalDays = $from->diffInDays($to) ?: 1;
+                $rate = $this->getRate($data['vehicle_id'], $totalDays);
+                $totalRent = $rate * $totalDays + doubleval($data['total_override']);
 
-            $reservation->save();
+                $reservation = Reservation::whipOut($from, $to, $data['primary_driver_id'], $data['vehicle_id'], $data['total_override'], $totalDays, $totalRent);
+
+                $reservation->save();
+
+                if (isset($data['additional_drivers'][0])) {
+                    // At this point we know there are at least one additional driver
+                    foreach ($data['additional_drivers'] as $driverId) {
+                        $additionalDriver = ReservationToDriver::whipOut($reservation->id, $driverId);
+                        $additionalDriver->save();
+                    }
+                }
+            }, 3);
 
             return redirect()->route('reservations.reservation.index')
                 ->with('success_message', trans('reservations.model_was_added'));
@@ -81,7 +93,7 @@ class ReservationsController extends Controller
      */
     public function show($id)
     {
-        $reservation = Reservation::with('primarydriver', 'vehicle')->findOrFail($id);
+        $reservation = Reservation::with('primarydriver', 'vehicle', 'additionalDrivers')->findOrFail($id);
 
         return view('reservations.show', compact('reservation'));
     }

@@ -8,6 +8,7 @@ return [
     'edit' => 'Edit Credit Payment',
     'show' => 'Show Credit Payment',
     'show_all' => 'Show All Credit Payment',
+    'paid_at' => 'Paid At',
     'add' => 'Add',
     'update' => 'Update',
     'confirm_delete' => 'Click Ok to delete Credit Payment.',

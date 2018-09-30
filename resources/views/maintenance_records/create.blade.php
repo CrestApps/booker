@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="maintenance_records_create_page">
 
         <div class="panel-heading clearfix">
-            
+
             <span class="pull-left">
                 <h4 class="mt-5 mb-5">{{ trans('maintenance_records.create') }}</h4>
             </span>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="panel-body">
-        
+
             @if ($errors->any())
                 <ul class="alert alert-danger">
                     @foreach ($errors->all() as $error)
@@ -30,9 +30,7 @@
 
             <form method="POST" action="{{ route('maintenance_records.maintenance_record.store') }}" accept-charset="UTF-8" id="create_maintenance_record_form" name="create_maintenance_record_form" class="form-horizontal">
             {{ csrf_field() }}
-            @include ('maintenance_records.form', [
-                                        'maintenanceRecord' => null,
-                                      ])
+            @include ('maintenance_records.form', ['maintenanceRecord' => null])
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -46,5 +44,3 @@
     </div>
 
 @endsection
-
-

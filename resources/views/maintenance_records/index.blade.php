@@ -29,7 +29,7 @@
             </div>
 
         </div>
-        
+
         @if(count($maintenanceRecords) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('maintenance_records.none_available') }}</h4>
@@ -42,7 +42,8 @@
                     <thead>
                         <tr>
                             <th>{{ trans('maintenance_records.vehicle_id') }}</th>
-                            <th>{{ trans('maintenance_records.catgeory_id') }}</th>
+                            <th>{{ trans('maintenance_records.category_id') }}</th>
+                            <th>Payment Method</th>
                             <th>{{ trans('maintenance_records.cost') }}</th>
                             <th>{{ trans('maintenance_records.paid_at') }}</th>
                             <th>{{ trans('maintenance_records.related_date') }}</th>
@@ -55,10 +56,11 @@
                     @foreach($maintenanceRecords as $maintenanceRecord)
                         <tr>
                             <td>{{ optional($maintenanceRecord->vehicle)->name }}</td>
-                            <td>{{ optional($maintenanceRecord->catgeory)->name }}</td>
+                            <td>{{ optional($maintenanceRecord->category)->name }}</td>
+                            <td>{{ $maintenanceRecord->payment_method }}</td>
                             <td>{{ $maintenanceRecord->cost }}</td>
-                            <td>{{ $maintenanceRecord->paid_at }}</td>
-                            <td>{{ $maintenanceRecord->related_date }}</td>
+                            <td>{{ $maintenanceRecord->paid_at->format(config('app.date_out_format')) }}</td>
+                            <td>{{ $maintenanceRecord->related_date->format(config('app.date_out_format')) }}</td>
                             <td>{{ $maintenanceRecord->notes }}</td>
 
                             <td>
@@ -81,7 +83,7 @@
                                     </div>
 
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -94,8 +96,8 @@
         <div class="panel-footer">
             {!! $maintenanceRecords->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

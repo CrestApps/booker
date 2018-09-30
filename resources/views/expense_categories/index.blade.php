@@ -41,7 +41,7 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>{{ trans('expense_categories.title') }}</th>
+                            <th>{{ trans('expense_categories.name') }}</th>
                             <th>{{ trans('expense_categories.sort') }}</th>
 
                             <th></th>
@@ -50,7 +50,7 @@
                     <tbody>
                     @foreach($expenseCategories as $expenseCategory)
                         <tr>
-                            <td>{{ $expenseCategory->title }}</td>
+                            <td>{{ $expenseCategory->name }}</td>
                             <td>{{ $expenseCategory->sort }}</td>
 
                             <td>

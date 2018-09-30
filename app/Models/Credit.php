@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\CreditPayment;
 use App\Models\Customer;
+use App\Models\ReservationToCredit;
 use Illuminate\Database\Eloquent\Model;
 
 class Credit extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -38,7 +39,6 @@ class Credit extends Model
      * @var array
      */
     protected $dates = [
-        'due_date',
     ];
 
     /**
@@ -69,6 +69,16 @@ class Credit extends Model
     }
 
     /**
+     * Get the reservation-to-credit relation models for this model.
+     *
+     * @return App\Models\ReservationToCredit
+     */
+    public function payments()
+    {
+        return $this->hasMany(CreditPayment::class);
+    }
+
+    /**
      * Makes a new instance of the model
      *
      * @param int $customerId
@@ -76,7 +86,7 @@ class Credit extends Model
      *
      * @return App\Models\Credit
      */
-    public static function make($customerId, $amount)
+    public static function whipOut($customerId, $amount)
     {
         $credit = new Credit();
 

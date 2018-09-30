@@ -86,10 +86,10 @@
             "api-description": {}
         },
         {
-            "name": "catgeory_id",
+            "name": "category_id",
             "labels": {
-                "en": "Catgeory",
-                "ar": "Catgeory"
+                "en": "Category",
+                "ar": "Category"
             },
             "html-type": "select",
             "css-class": "",
@@ -114,24 +114,64 @@
             "is-date": false,
             "date-format": "",
             "cast-as": "",
-            "placeholder": "Please select a catgeory",
+            "placeholder": "Please select a category",
             "delimiter": "; ",
             "range": [],
             "foreign-relation": {
-                "name": "catgeory",
+                "name": "category",
                 "type": "belongsTo",
                 "params": [
-                    "App\\Models\\MaintenanceCatgeory",
-                    "catgeory_id"
+                    "App\\Models\\MaintenanceCategory",
+                    "category_id"
                 ],
                 "field": "name"
             },
             "foreign-constraint": null,
             "on-store": null,
             "on-update": null,
-            "api-key": "catgeory_id",
+            "api-key": "category_id",
             "is-api-visible": true,
             "api-description": {}
+        },
+        {
+            "name": "payment_method",
+            "labels": "Payment Method",
+            "html-type": "select",
+            "css-class": "",
+            "options": {
+                "Cash": "Cash",
+                "Checks": "Checks"
+            },
+            "html-value": null,
+            "validation": "string|min:1",
+            "is-on-index": true,
+            "is-on-show": true,
+            "is-on-form": true,
+            "data-type": "string",
+            "data-type-params": [],
+            "data-value": null,
+            "is-index": false,
+            "is-unique": false,
+            "is-primary": false,
+            "comment": null,
+            "is-nullable": true,
+            "is-header": false,
+            "is-unsigned": false,
+            "is-auto-increment": false,
+            "is-inline-options": false,
+            "is-date": false,
+            "date-format": "",
+            "cast-as": "",
+            "placeholder": "Enter payment method here...",
+            "delimiter": "; ",
+            "range": [],
+            "foreign-relation": null,
+            "foreign-constraint": null,
+            "on-store": null,
+            "on-update": null,
+            "api-key": "payment_method",
+            "is-api-visible": true,
+            "api-description": "The payment method of the model."
         },
         {
             "name": "cost",
@@ -304,19 +344,19 @@
     "auto-manage-created-and-updated-at": true,
     "table-name": null,
     "protection": {
-        "is-model-protected": false,
-        "is-controller-protected": false,
+        "is-model-protected": true,
+        "is-controller-protected": true,
         "is-api-resource-protected": false,
         "is-api-resource-collection-protected": false,
         "is-api-documentation-protected": false,
         "is-api-documentation-controller-protected": false,
-        "is-form-request-protected": false,
+        "is-form-request-protected": true,
         "is-languages-protected": false,
-        "is-form-view-protected": false,
-        "is-index-view-protected": false,
-        "is-create-view-protected": false,
-        "is-edit-view-protected": false,
-        "is-show-view-protected": false
+        "is-form-view-protected": true,
+        "is-index-view-protected": true,
+        "is-create-view-protected": true,
+        "is-edit-view-protected": true,
+        "is-show-view-protected": true
     },
     "api-documentation": []
 }

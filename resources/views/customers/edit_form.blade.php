@@ -10,7 +10,7 @@
 <div class="form-group {{ $errors->has('home_address') ? 'has-error' : '' }}">
     <label for="home_address" class="col-md-2 control-label">{{ trans('customers.home_address') }}</label>
     <div class="col-md-10">
-        <textarea class="form-control" name="home_address" cols="50" rows="10" id="home_address" maxlength="500">{{ old('home_address', optional($customer)->home_address) }}</textarea>
+        <textarea class="form-control" name="home_address" id="home_address" maxlength="500">{{ old('home_address', optional($customer)->home_address) }}</textarea>
         {!! $errors->first('home_address', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="form-group {{ $errors->has('birth_date') ? 'has-error' : '' }}">
     <label for="birth_date" class="col-md-2 control-label">{{ trans('customers.birth_date') }}</label>
     <div class="col-md-10">
-        <input class="form-control date-picker" name="birth_date" type="text" id="birth_date" value="{{ old('birth_date', optional($customer)->birth_date) }}" required="true">
+        <input class="form-control date-picker" name="birth_date" type="text" id="birth_date" value="{{ old('birth_date', optional($customer)->birth_date->format(config('app.date_out_format'))) }}" required="true">
         {!! $errors->first('birth_date', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -42,7 +42,7 @@
 <div class="form-group {{ $errors->has('driver_license_issue_date') ? 'has-error' : '' }}">
     <label for="driver_license_issue_date" class="col-md-2 control-label">{{ trans('customers.driver_license_issue_date') }}</label>
     <div class="col-md-10">
-        <input class="form-control date-picker" name="driver_license_issue_date" type="text" id="driver_license_issue_date" value="{{ old('driver_license_issue_date', optional($customer)->driver_license_issue_date) }}" required="true">
+        <input class="form-control date-picker" name="driver_license_issue_date" type="text" id="driver_license_issue_date" value="{{ old('driver_license_issue_date', optional($customer)->driver_license_issue_date->format(config('app.date_out_format'))) }}" required="true">
         {!! $errors->first('driver_license_issue_date', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -50,7 +50,7 @@
 <div class="form-group {{ $errors->has('driver_license_experation_date') ? 'has-error' : '' }}">
     <label for="driver_license_experation_date" class="col-md-2 control-label">{{ trans('customers.driver_license_experation_date') }}</label>
     <div class="col-md-10">
-        <input class="form-control date-picker" name="driver_license_experation_date" type="text" id="driver_license_experation_date" value="{{ old('driver_license_experation_date', optional($customer)->driver_license_experation_date) }}" required="true">
+        <input class="form-control date-picker" name="driver_license_experation_date" type="text" id="driver_license_experation_date" value="{{ old('driver_license_experation_date', optional($customer)->driver_license_experation_date->format(config('app.date_out_format'))) }}" required="true">
         {!! $errors->first('driver_license_experation_date', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -80,8 +80,7 @@
 <div class="form-group {{ $errors->has('black_list_notes') ? 'has-error' : '' }}">
     <label for="black_list_notes" class="col-md-2 control-label">{{ trans('customers.black_list_notes') }}</label>
     <div class="col-md-10">
-        <textarea class="form-control" name="black_list_notes" cols="50" rows="10" id="black_list_notes" maxlength="1000">{{ old('black_list_notes', optional($customer)->black_list_notes) }}</textarea>
+        <textarea class="form-control" name="black_list_notes" id="black_list_notes" maxlength="1000">{{ old('black_list_notes', optional($customer)->black_list_notes) }}</textarea>
         {!! $errors->first('black_list_notes', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-

@@ -19,7 +19,7 @@ class ReservationToCreditsController extends Controller
      */
     public function index()
     {
-        $reservationToCredits = ReservationToCredit::with('credit','reservation')->paginate(25);
+        $reservationToCredits = ReservationToCredit::with('credit', 'reservation')->paginate(25);
 
         return view('reservation_to_credits.index', compact('reservationToCredits'));
     }
@@ -31,10 +31,10 @@ class ReservationToCreditsController extends Controller
      */
     public function create()
     {
-        $credits = Credit::pluck('created_at','id')->all();
-$reservations = Reservation::pluck('created_at','id')->all();
-        
-        return view('reservation_to_credits.create', compact('credits','reservations'));
+        $credits = Credit::pluck('created_at', 'id')->all();
+        $reservations = Reservation::pluck('created_at', 'id')->all();
+
+        return view('reservation_to_credits.create', compact('credits', 'reservations'));
     }
 
     /**
@@ -47,9 +47,9 @@ $reservations = Reservation::pluck('created_at','id')->all();
     public function store(ReservationToCreditsFormRequest $request)
     {
         try {
-            
+
             $data = $request->getData();
-            
+
             ReservationToCredit::create($data);
 
             return redirect()->route('reservation_to_credits.reservation_to_credit.index')
@@ -70,7 +70,7 @@ $reservations = Reservation::pluck('created_at','id')->all();
      */
     public function show($id)
     {
-        $reservationToCredit = ReservationToCredit::with('credit','reservation')->findOrFail($id);
+        $reservationToCredit = ReservationToCredit::with('credit', 'reservation')->findOrFail($id);
 
         return view('reservation_to_credits.show', compact('reservationToCredit'));
     }
@@ -85,10 +85,10 @@ $reservations = Reservation::pluck('created_at','id')->all();
     public function edit($id)
     {
         $reservationToCredit = ReservationToCredit::findOrFail($id);
-        $credits = Credit::pluck('created_at','id')->all();
-$reservations = Reservation::pluck('created_at','id')->all();
+        $credits = Credit::pluck('created_at', 'id')->all();
+        $reservations = Reservation::pluck('created_at', 'id')->all();
 
-        return view('reservation_to_credits.edit', compact('reservationToCredit','credits','reservations'));
+        return view('reservation_to_credits.edit', compact('reservationToCredit', 'credits', 'reservations'));
     }
 
     /**
@@ -102,9 +102,9 @@ $reservations = Reservation::pluck('created_at','id')->all();
     public function update($id, ReservationToCreditsFormRequest $request)
     {
         try {
-            
+
             $data = $request->getData();
-            
+
             $reservationToCredit = ReservationToCredit::findOrFail($id);
             $reservationToCredit->update($data);
 
@@ -114,7 +114,7 @@ $reservations = Reservation::pluck('created_at','id')->all();
 
             return back()->withInput()
                 ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request.']);
-        }        
+        }
     }
 
     /**
@@ -138,7 +138,5 @@ $reservations = Reservation::pluck('created_at','id')->all();
                 ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request.']);
         }
     }
-
-
 
 }

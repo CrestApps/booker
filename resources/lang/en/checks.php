@@ -1,11 +1,12 @@
 <?php
 
 return [
+    'check_id' => 'Check Id',
     'customer_id' => 'Customer',
     'total' => 'Total',
     'due_date' => 'Due Date',
     'status' => 'Status',
-    'status_not_cashed' => 'Not Cashed',
+    'status_received' => 'Received',
     'status_cleared' => 'Cleared',
     'status_bounced' => 'Bounced',
     'create' => 'Create New Check',
@@ -13,6 +14,7 @@ return [
     'edit' => 'Edit Check',
     'show' => 'Show Check',
     'show_all' => 'Show All Check',
+    'reservation_id' => 'Reservation Id',
     'add' => 'Add',
     'update' => 'Update',
     'confirm_delete' => 'Click Ok to delete Check.',

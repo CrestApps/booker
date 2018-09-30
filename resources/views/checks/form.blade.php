@@ -1,3 +1,11 @@
+<div class="form-group mb-0">
+    <label for="reservation_id" class="col-md-2 control-label">{{ trans('checks.reservation_id') }}</label>
+    <div class="col-md-10 pt-5">
+        <p>{{ optional($check)->reservation_id }}</p>
+    </div>
+</div>
+
+
 
 <div class="form-group {{ $errors->has('customer_id') ? 'has-error' : '' }}">
     <label for="customer_id" class="col-md-2 control-label">{{ trans('checks.customer_id') }}</label>
@@ -10,7 +18,7 @@
 			    </option>
 			@endforeach
         </select>
-        
+
         {!! $errors->first('customer_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -26,7 +34,7 @@
 <div class="form-group {{ $errors->has('due_date') ? 'has-error' : '' }}">
     <label for="due_date" class="col-md-2 control-label">{{ trans('checks.due_date') }}</label>
     <div class="col-md-10">
-        <input class="form-control date-picker" name="due_date" type="text" id="due_date" value="{{ old('due_date', optional($check)->due_date) }}" required="true">
+        <input class="form-control date-picker" name="due_date" type="text" id="due_date" value="{{ old('due_date', optional(optional($check)->due_date)->format(config('app.date_out_format')) ) }}" required="true">
         {!! $errors->first('due_date', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -34,24 +42,17 @@
 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
     <label for="status" class="col-md-2 control-label">{{ trans('checks.status') }}</label>
     <div class="col-md-10">
-        <input class="form-control" name="status" type="text" id="status" value="{{ old('status', optional($check)->status) }}" minlength="1" required="true">
-        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
+        <select class="form-control" id="status" name="status" required="true">
 
-<div class="form-group {{ $errors->has('reservation_id') ? 'has-error' : '' }}">
-    <label for="reservation_id" class="col-md-2 control-label">Reservation</label>
-    <div class="col-md-10">
-        <select class="form-control" id="reservation_id" name="reservation_id">
-        	    <option value="" style="display: none;" {{ old('reservation_id', optional($check)->reservation_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select reservation</option>
-        	@foreach ($reservations as $key => $reservation)
-			    <option value="{{ $key }}" {{ old('reservation_id', optional($check)->reservation_id) == $key ? 'selected' : '' }}>
-			    	{{ $reservation }}
+        	@foreach (['received' => trans('checks.status_received'),
+                       'cleared' => trans('checks.status_cleared'),
+                       'bounced' => trans('checks.status_bounced')] as $key => $text)
+			    <option value="{{ $key }}" {{ old('status', optional($check)->status) == $key ? 'selected' : '' }}>
+			    	{{ $text }}
 			    </option>
 			@endforeach
         </select>
-        
-        {!! $errors->first('reservation_id', '<p class="help-block">:message</p>') !!}
+
+        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-

@@ -43,6 +43,8 @@
                         <tr>
                             <th>{{ trans('credit_payments.credit_id') }}</th>
                             <th>{{ trans('credit_payments.amount') }}</th>
+                            <th>Payment Method</th>
+                            <th>Check</th>
 
                             <th></th>
                         </tr>
@@ -52,6 +54,8 @@
                         <tr>
                             <td>{{ optional($creditPayment->credit)->id }}</td>
                             <td>{{ $creditPayment->amount }}</td>
+                            <td>{{ $creditPayment->payment_method }}</td>
+                            <td>{{ optional($creditPayment->check)->created_at }}</td>
 
                             <td>
 

@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReservationToDriver extends Model
 {
-    
-
     /**
      * The database table used by the model.
      *
@@ -16,10 +14,10 @@ class ReservationToDriver extends Model
     protected $table = 'reservation_to_drivers';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -28,9 +26,9 @@ class ReservationToDriver extends Model
      * @var array
      */
     protected $fillable = [
-                  'reservation_id',
-                  'driver_id'
-              ];
+        'reservation_id',
+        'driver_id',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,14 +36,14 @@ class ReservationToDriver extends Model
      * @var array
      */
     protected $dates = [];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [];
-    
+
     /**
      * Get the reservation for this model.
      *
@@ -53,7 +51,7 @@ class ReservationToDriver extends Model
      */
     public function reservation()
     {
-        return $this->belongsTo('App\Models\Reservation','reservation_id');
+        return $this->belongsTo('App\Models\Reservation', 'reservation_id');
     }
 
     /**
@@ -63,9 +61,25 @@ class ReservationToDriver extends Model
      */
     public function driver()
     {
-        return $this->belongsTo('App\Models\Driver','driver_id');
+        return $this->belongsTo('App\Models\Driver', 'driver_id');
     }
 
+    /**
+     * Create a new instance of the ReservationToDriver model
+     *
+     * @param int $reservationId
+     * @param int $customerId
+     *
+     * @return App\Models\ReservationToDriver
+     */
+    public static function whipOut($reservationId, $customerId)
+    {
+        $relation = new ReservationToDriver();
 
+        $relation->reservation_id = $reservationId;
+        $relation->driver_id = $customerId;
+
+        return $relation;
+    }
 
 }

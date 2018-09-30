@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
-
 
 class CreditPaymentsFormRequest extends FormRequest
 {
@@ -14,7 +14,7 @@ class CreditPaymentsFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -25,26 +25,28 @@ class CreditPaymentsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'credit_id' => 'required',
-            'amount' => 'required|numeric|min:-9999999.999|max:9999999.999',
+            'credit_id' => 'required|integer',
+            'payment_method' => 'required|in:cash,bank_card,check',
+            'amount' => 'required|numeric|min:0.01|max:9999999.999',
         ];
+
+        if ($this->method() == 'POST') {
+            $rules['due_date'] = 'nullable|date_format:j/n/Y|required_if:payment_method,check';
+        }
 
         return $rules;
     }
-    
+
     /**
-     * Get the request's data from the request.
+     * Handle a failed validation attempt.
      *
-     * 
-     * @return array
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function getData()
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
-        $data = $this->only(['credit_id', 'amount']);
-
-
-
-        return $data;
+        dd($validator->failed());
     }
-
 }

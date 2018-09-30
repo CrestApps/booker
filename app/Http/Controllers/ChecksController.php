@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ChecksFormRequest;
 use App\Models\Check;
 use App\Models\Customer;
-use App\Models\Reservation;
 use Exception;
 
 class ChecksController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the checks.
@@ -19,46 +27,9 @@ class ChecksController extends Controller
      */
     public function index()
     {
-        $checks = Check::with('customer','reservation')->paginate(25);
+        $checks = Check::with('customer')->paginate(25);
 
         return view('checks.index', compact('checks'));
-    }
-
-    /**
-     * Show the form for creating a new check.
-     *
-     * @return Illuminate\View\View
-     */
-    public function create()
-    {
-        $customers = Customer::pluck('fullname','id')->all();
-$reservations = Reservation::pluck('created_at','id')->all();
-        
-        return view('checks.create', compact('customers','reservations'));
-    }
-
-    /**
-     * Store a new check in the storage.
-     *
-     * @param App\Http\Requests\ChecksFormRequest $request
-     *
-     * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
-     */
-    public function store(ChecksFormRequest $request)
-    {
-        try {
-            
-            $data = $request->getData();
-            
-            Check::create($data);
-
-            return redirect()->route('checks.check.index')
-                ->with('success_message', trans('checks.model_was_added'));
-        } catch (Exception $exception) {
-
-            return back()->withInput()
-                ->withErrors(['unexpected_error' => trans('checks.unexpected_error')]);
-        }
     }
 
     /**
@@ -70,7 +41,7 @@ $reservations = Reservation::pluck('created_at','id')->all();
      */
     public function show($id)
     {
-        $check = Check::with('customer','reservation')->findOrFail($id);
+        $check = Check::with('customer')->findOrFail($id);
 
         return view('checks.show', compact('check'));
     }
@@ -85,10 +56,9 @@ $reservations = Reservation::pluck('created_at','id')->all();
     public function edit($id)
     {
         $check = Check::findOrFail($id);
-        $customers = Customer::pluck('fullname','id')->all();
-$reservations = Reservation::pluck('created_at','id')->all();
+        $customers = Customer::pluck('fullname', 'id')->all();
 
-        return view('checks.edit', compact('check','customers','reservations'));
+        return view('checks.edit', compact('check', 'customers'));
     }
 
     /**
@@ -102,9 +72,8 @@ $reservations = Reservation::pluck('created_at','id')->all();
     public function update($id, ChecksFormRequest $request)
     {
         try {
-            
             $data = $request->getData();
-            
+
             $check = Check::findOrFail($id);
             $check->update($data);
 
@@ -114,7 +83,7 @@ $reservations = Reservation::pluck('created_at','id')->all();
 
             return back()->withInput()
                 ->withErrors(['unexpected_error' => trans('checks.unexpected_error')]);
-        }        
+        }
     }
 
     /**
@@ -138,7 +107,5 @@ $reservations = Reservation::pluck('created_at','id')->all();
                 ->withErrors(['unexpected_error' => trans('checks.unexpected_error')]);
         }
     }
-
-
 
 }

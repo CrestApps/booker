@@ -23,13 +23,11 @@
             </div>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('checks.check.create') }}" class="btn btn-success" title="{{ trans('checks.create') }}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
+
             </div>
 
         </div>
-        
+
         @if(count($checks) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('checks.none_available') }}</h4>
@@ -45,7 +43,6 @@
                             <th>{{ trans('checks.total') }}</th>
                             <th>{{ trans('checks.due_date') }}</th>
                             <th>{{ trans('checks.status') }}</th>
-                            <th>Reservation</th>
 
                             <th></th>
                         </tr>
@@ -55,9 +52,8 @@
                         <tr>
                             <td>{{ optional($check->customer)->fullname }}</td>
                             <td>{{ $check->total }}</td>
-                            <td>{{ $check->due_date }}</td>
+                            <td>{{ optional($check->due_date)->format(config('app.date_out_format')) }}</td>
                             <td>{{ $check->status }}</td>
-                            <td>{{ optional($check->reservation)->created_at }}</td>
 
                             <td>
 
@@ -79,7 +75,7 @@
                                     </div>
 
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -92,8 +88,8 @@
         <div class="panel-footer">
             {!! $checks->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

@@ -41,9 +41,10 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
+                            <th>{{ trans('expenses.category_id') }}</th>
                             <th>{{ trans('expenses.related_date') }}</th>
                             <th>{{ trans('expenses.amount') }}</th>
-                            <th>{{ trans('expenses.category_id') }}</th>
+                            <th>Pay Date</th>
 
                             <th></th>
                         </tr>
@@ -51,9 +52,10 @@
                     <tbody>
                     @foreach($expenses as $expense)
                         <tr>
+                            <td>{{ optional($expense->category)->Name }}</td>
                             <td>{{ $expense->related_date }}</td>
                             <td>{{ $expense->amount }}</td>
-                            <td>{{ optional($expense->category)->Name }}</td>
+                            <td>{{ $expense->pay_date }}</td>
 
                             <td>
 

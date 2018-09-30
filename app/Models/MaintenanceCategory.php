@@ -54,15 +54,5 @@ class MaintenanceCategory extends Model
     
 
 
-    /**
-     * Get deleted_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDeletedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-    }
 
 }

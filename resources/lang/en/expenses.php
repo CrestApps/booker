@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'related_date' => 'Related Date',
-    'amount' => 'Amount',
     'category_id' => 'Category',
+    'related_date' => 'Related Month',
+    'amount' => 'Amount',
     'notes' => 'Notes',
     'create' => 'Create New Expense',
     'delete' => 'Delete Expense',

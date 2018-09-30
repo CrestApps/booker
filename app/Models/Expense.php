@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Expense extends Model
 {
-
+    
     use SoftDeletes;
+
 
     /**
      * The database table used by the model.
@@ -18,10 +19,10 @@ class Expense extends Model
     protected $table = 'expenses';
 
     /**
-     * The database primary key value.
-     *
-     * @var string
-     */
+    * The database primary key value.
+    *
+    * @var string
+    */
     protected $primaryKey = 'id';
 
     /**
@@ -30,11 +31,12 @@ class Expense extends Model
      * @var array
      */
     protected $fillable = [
-        'related_date',
-        'amount',
-        'category_id',
-        'notes',
-    ];
+                  'category_id',
+                  'related_date',
+                  'amount',
+                  'pay_date',
+                  'notes'
+              ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -42,16 +44,16 @@ class Expense extends Model
      * @var array
      */
     protected $dates = [
-        'deleted_at',
-    ];
-
+               'deleted_at'
+           ];
+    
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [];
-
+    
     /**
      * Get the category for this model.
      *
@@ -59,7 +61,7 @@ class Expense extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\ExpenseCategory', 'category_id');
+        return $this->belongsTo('App\Models\ExpenseCategory','category_id');
     }
 
     /**
@@ -70,7 +72,18 @@ class Expense extends Model
      */
     public function setRelatedDateAttribute($value)
     {
-        $this->attributes['related_date'] = !empty($value) ? \DateTime::createFromFormat(config('app.date_out_format'), $value) : null;
+        $this->attributes['related_date'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
+    }
+
+    /**
+     * Set the pay_date.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPayDateAttribute($value)
+    {
+        $this->attributes['pay_date'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
     }
 
     /**
@@ -81,18 +94,18 @@ class Expense extends Model
      */
     public function getRelatedDateAttribute($value)
     {
-        return \DateTime::createFromFormat(config('app.date_out_format'), $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y');
     }
 
     /**
-     * Get deleted_at in array format
+     * Get pay_date in array format
      *
      * @param  string  $value
      * @return array
      */
-    public function getDeletedAtAttribute($value)
+    public function getPayDateAttribute($value)
     {
-        return \DateTime::createFromFormat(config('app.datetime_out_format'), $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y');
     }
 
 }

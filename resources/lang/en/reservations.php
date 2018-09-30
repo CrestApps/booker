@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'reservation_id' => 'Reservation Id',
+    'reservations_history' => 'Reservations History',
     'primary_driver_id' => 'Primary Driver',
     'vehicle_id' => 'Vehicle',
     'reserved_from' => 'From',
@@ -33,6 +35,7 @@ return [
     'total_owe' => 'Total Due',
     'rate' => 'Rate',
     'payment' => 'Payment',
+    'payment_methods' => 'Payment method',
     'select_payment_method' => 'Select a method',
     'add_payment_method' => 'Add Payment Method',
     'due_date' => 'Due Date',
@@ -56,6 +59,7 @@ return [
     'confirm_delete' => 'Click Ok to delete Reservation.',
     'none_available' => 'No Reservations Available.',
     'model_plural' => 'Reservations',
+    'model_singular' => 'Reservation',
     'model_was_added' => 'Reservation was successfully added.',
     'model_was_retrieved' => 'Reservation was successfully retrieved.',
     'models_were_retrieved' => 'Reservations were successfully retrieved.',

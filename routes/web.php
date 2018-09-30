@@ -96,19 +96,10 @@ Route::group([
 Route::group([
     'prefix' => 'credit_payments',
 ], function () {
-    Route::get('/', 'CreditPaymentsController@index')
-        ->name('credit_payments.credit_payment.index');
-    Route::get('/create', 'CreditPaymentsController@create')
-        ->name('credit_payments.credit_payment.create');
-    Route::get('/show/{creditPayment}', 'CreditPaymentsController@show')
-        ->name('credit_payments.credit_payment.show')
-        ->where('id', '[0-9]+');
-    Route::get('/{creditPayment}/edit', 'CreditPaymentsController@edit')
-        ->name('credit_payments.credit_payment.edit')
-        ->where('id', '[0-9]+');
+
     Route::post('/', 'CreditPaymentsController@store')
         ->name('credit_payments.credit_payment.store');
-    Route::put('credit_payment/{creditPayment}', 'CreditPaymentsController@update')
+    Route::patch('credit_payment/{creditPayment}', 'CreditPaymentsController@update')
         ->name('credit_payments.credit_payment.update')
         ->where('id', '[0-9]+');
     Route::delete('/credit_payment/{creditPayment}', 'CreditPaymentsController@destroy')
@@ -137,6 +128,8 @@ Route::group([
     Route::delete('/credit/{credit}', 'CreditsController@destroy')
         ->name('credits.credit.destroy')
         ->where('id', '[0-9]+');
+    Route::get('/search/{term?}', 'CreditsController@index')
+        ->name('credits.credit.search');
 });
 
 Route::group([
@@ -145,6 +138,9 @@ Route::group([
 
     Route::get('/', 'CustomersController@index')
         ->name('customers.customer.index');
+
+    Route::get('/search/{term?}', 'CustomersController@index')
+        ->name('customers.customer.search');
 
     Route::get('/create', 'CustomersController@create')
         ->name('customers.customer.create');
@@ -518,17 +514,17 @@ Route::group([
     'prefix' => 'reservation_to_credits',
 ], function () {
     Route::get('/', 'ReservationToCreditsController@index')
-         ->name('reservation_to_credits.reservation_to_credit.index');
-    Route::get('/create','ReservationToCreditsController@create')
-         ->name('reservation_to_credits.reservation_to_credit.create');
-    Route::get('/show/{reservationToCredit}','ReservationToCreditsController@show')
-         ->name('reservation_to_credits.reservation_to_credit.show')->where('id', '[0-9]+');
-    Route::get('/{reservationToCredit}/edit','ReservationToCreditsController@edit')
-         ->name('reservation_to_credits.reservation_to_credit.edit')->where('id', '[0-9]+');
+        ->name('reservation_to_credits.reservation_to_credit.index');
+    Route::get('/create', 'ReservationToCreditsController@create')
+        ->name('reservation_to_credits.reservation_to_credit.create');
+    Route::get('/show/{reservationToCredit}', 'ReservationToCreditsController@show')
+        ->name('reservation_to_credits.reservation_to_credit.show')->where('id', '[0-9]+');
+    Route::get('/{reservationToCredit}/edit', 'ReservationToCreditsController@edit')
+        ->name('reservation_to_credits.reservation_to_credit.edit')->where('id', '[0-9]+');
     Route::post('/', 'ReservationToCreditsController@store')
-         ->name('reservation_to_credits.reservation_to_credit.store');
+        ->name('reservation_to_credits.reservation_to_credit.store');
     Route::put('reservation_to_credit/{reservationToCredit}', 'ReservationToCreditsController@update')
-         ->name('reservation_to_credits.reservation_to_credit.update')->where('id', '[0-9]+');
-    Route::delete('/reservation_to_credit/{reservationToCredit}','ReservationToCreditsController@destroy')
-         ->name('reservation_to_credits.reservation_to_credit.destroy')->where('id', '[0-9]+');
+        ->name('reservation_to_credits.reservation_to_credit.update')->where('id', '[0-9]+');
+    Route::delete('/reservation_to_credit/{reservationToCredit}', 'ReservationToCreditsController@destroy')
+        ->name('reservation_to_credits.reservation_to_credit.destroy')->where('id', '[0-9]+');
 });

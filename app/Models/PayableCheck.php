@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PayableCheck extends Model
 {
-
     use SoftDeletes;
 
     /**
@@ -45,6 +45,8 @@ class PayableCheck extends Model
      */
     protected $dates = [
         'deleted_at',
+        'due_date',
+        'issue_date',
     ];
 
     /**
@@ -65,58 +67,28 @@ class PayableCheck extends Model
     }
 
     /**
-     * Set the due_date.
+     * Get a new instance of the PayableCheck model
      *
-     * @param  string  $value
-     * @return void
-     */
-    public function setDueDateAttribute($value)
-    {
-        $this->attributes['due_date'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
-    }
-
-    /**
-     * Set the issue_date.
+     * @param int $number
+     * @param double $amount
+     * @param Date $dueDate
+     * @param DateTime $paidAt
+     * @param int $expenseId
+     * @param bit $isCashed
      *
-     * @param  string  $value
-     * @return void
+     * @return App\Models\PayableCheck
      */
-    public function setIssueDateAttribute($value)
+    public static function whipOut($number, $amount, $dueDate, $paidAt, $expenseId, $isCashed = 0)
     {
-        $this->attributes['issue_date'] = !empty($value) ? \DateTime::createFromFormat(config('app.date_out_format'), $value) : null;
-    }
+        $check = new PayableCheck();
 
-    /**
-     * Get due_date in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDueDateAttribute($value)
-    {
-        return \DateTime::createFromFormat(config('app.date_out_format'), $value);
-    }
+        $check->number = $number;
+        $check->value = $amount;
+        $check->due_date = is_string($dueDate) ? Carbon::createFromFormat(config('app.date_out_format'), $dueDate) : $dueDate;
+        $check->issue_date = is_string($paidAt) ? Carbon::createFromFormat(config('app.date_out_format'), $paidAt) : $paidAt;
+        $check->expense_id = $expenseId;
+        $check->is_cashed = $isCashed;
 
-    /**
-     * Get issue_date in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getIssueDateAttribute($value)
-    {
-        return \DateTime::createFromFormat(config('app.date_out_format'), $value);
+        return $check;
     }
-
-    /**
-     * Get deleted_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDeletedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat(config('app.datetime_out_format'), $value);
-    }
-
 }

@@ -99,12 +99,12 @@ class ReservationDropoffsController extends Controller
                     $checkId = null;
                     if ($payment['method'] == 'check') {
                         $dueDate = Carbon::createFromFormat('j/n/Y', $payment['due_date']);
-                        $check = Check::make($reservation->id, $reservation->primary_driver_id, $payment['amount'], $dueDate);
+                        $check = Check::whipOut($reservation->id, $reservation->primary_driver_id, $payment['amount'], $dueDate);
                         $check->save();
                         $checkId = $check->id;
                     }
 
-                    $payment = CreditPayment::make($reservation->primaryDriver->credit->id, $payment['amount'], $payment['method'], $checkId);
+                    $payment = CreditPayment::whipOut($reservation->primaryDriver->credit->id, $payment['amount'], $payment['method'], $checkId);
                     $payment->save();
                     $reservation->primaryDriver->credit->amount -= $payment['amount'];
                     $reservation->primaryDriver->credit->save();

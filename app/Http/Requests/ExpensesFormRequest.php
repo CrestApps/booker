@@ -25,9 +25,10 @@ class ExpensesFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'related_date' => 'required|date_format:j/n/Y',
-            'amount' => 'required|numeric|min:-9999999.999|max:9999999.999',
             'category_id' => 'required',
+            'related_date' => 'required|date_format:n/Y|date_format:j/n/Y',
+            'amount' => 'required|numeric|min:-9999999.999|max:9999999.999',
+            'pay_date' => 'required|date_format:j/n/Y',
             'notes' => 'nullable|string|min:0|max:1000',
         ];
 
@@ -42,7 +43,7 @@ class ExpensesFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['related_date', 'amount', 'category_id', 'notes']);
+        $data = $this->only(['category_id', 'related_date', 'amount', 'pay_date', 'notes']);
 
 
 

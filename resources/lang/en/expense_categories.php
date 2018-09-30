@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Title',
+    'name' => 'Name',
     'sort' => 'Sort',
     'create' => 'Create New Expense Category',
     'delete' => 'Delete Expense Category',

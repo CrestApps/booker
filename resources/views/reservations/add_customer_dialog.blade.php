@@ -12,7 +12,7 @@
 
           <div class="alert alert-danger hidden" id="customer_dialog_error_placeholder">
           </div>
-
+          <div class="hidden" id="add_customer_dialog_type" value=""></div>
           <form method="POST" action="{{ route('customers.customer.store') }}" accept-charset="UTF-8" id="create_customer_form" name="create_customer_form" class="form-horizontal">
           {{ csrf_field() }}
           @include ('customers.create_form', ['customer' => null])

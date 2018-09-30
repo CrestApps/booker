@@ -39,12 +39,14 @@
 
     <div class="panel-body">
         <dl class="dl-horizontal">
+            <dt>{{ trans('expenses.category_id') }}</dt>
+            <dd>{{ optional($expense->category)->Name }}</dd>
             <dt>{{ trans('expenses.related_date') }}</dt>
             <dd>{{ $expense->related_date }}</dd>
             <dt>{{ trans('expenses.amount') }}</dt>
             <dd>{{ $expense->amount }}</dd>
-            <dt>{{ trans('expenses.category_id') }}</dt>
-            <dd>{{ optional($expense->category)->Name }}</dd>
+            <dt>Pay Date</dt>
+            <dd>{{ $expense->pay_date }}</dd>
             <dt>{{ trans('expenses.notes') }}</dt>
             <dd>{{ $expense->notes }}</dd>
 

@@ -54,12 +54,6 @@
     </li>
 
     <li>
-        <a href="{{ route('credit_payments.credit_payment.index') }}">
-            {{ trans('credit_payments.model_plural') }}
-        </a>
-    </li>
-
-    <li>
         <a href="{{ route('credits.credit.index') }}">
             {{ trans('credits.model_plural') }}
         </a>

@@ -23,13 +23,25 @@
             </div>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('credits.credit.create') }}" class="btn btn-success" title="{{ trans('credits.create') }}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
+
             </div>
 
         </div>
-        
+
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <form method="GET" action="{{ route('credits.credit.search') }}" accept-charset="UTF-8" class="form-inline">
+                    <div class="form-group">
+                       <label for="search_term" class="sr-only">Search for:</label>
+                       <input type="text" name="term" class="form-control" id="search_term" value="{{ old('term', $term) }}" placeholder="Search customer...">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+            </div>
+        </div>
+
+
         @if(count($credits) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('credits.none_available') }}</h4>
@@ -43,7 +55,6 @@
                         <tr>
                             <th>{{ trans('credits.customer_id') }}</th>
                             <th>{{ trans('credits.amount') }}</th>
-                            <th>{{ trans('credits.due_date') }}</th>
 
                             <th></th>
                         </tr>
@@ -53,29 +64,15 @@
                         <tr>
                             <td>{{ optional($credit->customer)->fullname }}</td>
                             <td>{{ $credit->amount }}</td>
-                            <td>{{ $credit->due_date }}</td>
 
                             <td>
+                                <div class="btn-group btn-group-xs pull-right" role="group">
 
-                                <form method="POST" action="{!! route('credits.credit.destroy', $credit->id) !!}" accept-charset="UTF-8">
-                                <input name="_method" value="DELETE" type="hidden">
-                                {{ csrf_field() }}
+                                    <a href="{{ route('credits.credit.show', $credit->id ) }}" class="btn btn-info" title="{{ trans('credits.show') }}">
+                                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                                    </a>
 
-                                    <div class="btn-group btn-group-xs pull-right" role="group">
-                                        <a href="{{ route('credits.credit.show', $credit->id ) }}" class="btn btn-info" title="{{ trans('credits.show') }}">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
-                                        </a>
-                                        <a href="{{ route('credits.credit.edit', $credit->id ) }}" class="btn btn-primary" title="{{ trans('credits.edit') }}">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                        </a>
-
-                                        <button type="submit" class="btn btn-danger" title="{{ trans('credits.delete') }}" onclick="return confirm(&quot;{{ trans('credits.confirm_delete') }}&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-
-                                </form>
-                                
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -88,8 +85,8 @@
         <div class="panel-footer">
             {!! $credits->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

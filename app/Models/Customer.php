@@ -78,6 +78,17 @@ class Customer extends Model
      * @param  string  $value
      * @return void
      */
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone'] = preg_replace("/[^0-9]/", '', $value);
+    }
+
+    /**
+     * Set the birth_date.
+     *
+     * @param  string  $value
+     * @return void
+     */
     public function setBirthDateAttribute($value)
     {
         $this->attributes['birth_date'] = !empty($value) ? \DateTime::createFromFormat(config('app.date_out_format'), $value) : null;
@@ -103,5 +114,28 @@ class Customer extends Model
     public function setDriverLicenseExperationDateAttribute($value)
     {
         $this->attributes['driver_license_experation_date'] = !empty($value) ? \DateTime::createFromFormat(config('app.date_out_format'), $value) : null;
+    }
+
+    /**
+     * Scope a query to only include active users.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $term
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearch($query, $term)
+    {
+        $t = trim($term);
+
+        if (empty($t)) {
+            return $query;
+        }
+
+        $phone = preg_replace("/[^0-9]/", '', $term);
+        return $query->where('fullname', 'like', '%' . $t . '%')
+            ->orWhere('personal_identification_number', $t)
+            ->orWhere('driver_license_number', $t)
+            ->orWhere('phone', $phone);
     }
 }

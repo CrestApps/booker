@@ -12,7 +12,7 @@
             "is-on-show": false,
             "is-on-form": false,
             "data-type": "int",
-            "data-type-params": [],
+            "data-type-params": [11],
             "data-value": null,
             "is-index": false,
             "is-unique": false,
@@ -38,10 +38,10 @@
             "api-description": {}
         },
         {
-            "name": "title",
+            "name": "name",
             "labels": {
-                "en": "Title",
-                "ar": "Title"
+                "en": "Name",
+                "ar": "Name"
             },
             "html-type": "text",
             "css-class": "",

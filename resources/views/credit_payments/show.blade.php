@@ -43,6 +43,10 @@
             <dd>{{ optional($creditPayment->credit)->id }}</dd>
             <dt>{{ trans('credit_payments.amount') }}</dt>
             <dd>{{ $creditPayment->amount }}</dd>
+            <dt>Payment Method</dt>
+            <dd>{{ $creditPayment->payment_method }}</dd>
+            <dt>Check</dt>
+            <dd>{{ optional($creditPayment->check)->created_at }}</dd>
 
         </dl>
 

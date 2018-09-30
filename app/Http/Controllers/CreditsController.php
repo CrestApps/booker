@@ -3,60 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreditsFormRequest;
 use App\Models\Credit;
 use App\Models\Customer;
 use Exception;
+use Illuminate\Http\Request;
 
 class CreditsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the credits.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $credits = Credit::with('customer')->paginate(25);
+        $term = $request->get('term');
 
-        return view('credits.index', compact('credits'));
-    }
+        $credits = Credit::with('customer')->whereHas('customer', function ($query) use ($term) {
+            $query->search($term);
+        })->paginate(25);
 
-    /**
-     * Show the form for creating a new credit.
-     *
-     * @return Illuminate\View\View
-     */
-    public function create()
-    {
-        $customers = Customer::pluck('fullname','id')->all();
-        
-        return view('credits.create', compact('customers'));
-    }
-
-    /**
-     * Store a new credit in the storage.
-     *
-     * @param App\Http\Requests\CreditsFormRequest $request
-     *
-     * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
-     */
-    public function store(CreditsFormRequest $request)
-    {
-        try {
-            
-            $data = $request->getData();
-            
-            Credit::create($data);
-
-            return redirect()->route('credits.credit.index')
-                ->with('success_message', trans('credits.model_was_added'));
-        } catch (Exception $exception) {
-
-            return back()->withInput()
-                ->withErrors(['unexpected_error' => trans('credits.unexpected_error')]);
-        }
+        return view('credits.index', compact('credits', 'term'));
     }
 
     /**
@@ -68,7 +45,7 @@ class CreditsController extends Controller
      */
     public function show($id)
     {
-        $credit = Credit::with('customer')->findOrFail($id);
+        $credit = Credit::with('customer', 'reservationRelations', 'payments')->findOrFail($id);
 
         return view('credits.show', compact('credit'));
     }
@@ -83,35 +60,9 @@ class CreditsController extends Controller
     public function edit($id)
     {
         $credit = Credit::findOrFail($id);
-        $customers = Customer::pluck('fullname','id')->all();
+        $customers = Customer::pluck('fullname', 'id')->all();
 
-        return view('credits.edit', compact('credit','customers'));
-    }
-
-    /**
-     * Update the specified credit in the storage.
-     *
-     * @param int $id
-     * @param App\Http\Requests\CreditsFormRequest $request
-     *
-     * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
-     */
-    public function update($id, CreditsFormRequest $request)
-    {
-        try {
-            
-            $data = $request->getData();
-            
-            $credit = Credit::findOrFail($id);
-            $credit->update($data);
-
-            return redirect()->route('credits.credit.index')
-                ->with('success_message', trans('credits.model_was_updated'));
-        } catch (Exception $exception) {
-
-            return back()->withInput()
-                ->withErrors(['unexpected_error' => trans('credits.unexpected_error')]);
-        }        
+        return view('credits.edit', compact('credit', 'customers'));
     }
 
     /**
@@ -135,7 +86,4 @@ class CreditsController extends Controller
                 ->withErrors(['unexpected_error' => trans('credits.unexpected_error')]);
         }
     }
-
-
-
 }

@@ -2,7 +2,7 @@
 
 return [
     'vehicle_id' => 'Vehicle',
-    'catgeory_id' => 'Catgeory',
+    'category_id' => 'category',
     'cost' => 'Cost',
     'paid_at' => 'Paid At',
     'related_date' => 'Related Date',

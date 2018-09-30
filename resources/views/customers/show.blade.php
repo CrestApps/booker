@@ -22,7 +22,7 @@
                     <a href="{{ route('customers.customer.create') }}" class="btn btn-success" title="{{ trans('customers.create') }}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    
+
                     <a href="{{ route('customers.customer.edit', $customer->id ) }}" class="btn btn-primary" title="{{ trans('customers.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
@@ -48,11 +48,11 @@
             <dt>{{ trans('customers.driver_license_number') }}</dt>
             <dd>{{ $customer->driver_license_number }}</dd>
             <dt>{{ trans('customers.birth_date') }}</dt>
-            <dd>{{ $customer->birth_date }}</dd>
+            <dd>{{ $customer->birth_date->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('customers.driver_license_issue_date') }}</dt>
-            <dd>{{ $customer->driver_license_issue_date }}</dd>
+            <dd>{{ $customer->driver_license_issue_date->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('customers.driver_license_experation_date') }}</dt>
-            <dd>{{ $customer->driver_license_experation_date }}</dd>
+            <dd>{{ $customer->driver_license_experation_date->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('customers.phone') }}</dt>
             <dd>{{ $customer->phone }}</dd>
             <dt>{{ trans('customers.is_black_listed') }}</dt>

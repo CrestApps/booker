@@ -26,6 +26,12 @@ window.getRequestObject = function (inputs)
     return final;
 }
 
+window.formToData = function(form) {
+    var data = form.serializeArray();
+
+    return getRequestObject(data);
+}
+
 window.getContent = function (html, index) {
     return html.replace(/_\d+__/g, '_' + index + '__')
         .replace(/\[\d+\]/g, '[' + index + ']');

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\MaintenanceCategory;
+use App\Models\PayableCheck;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MaintenanceRecord extends Model
 {
-
     use SoftDeletes;
 
     /**
@@ -31,7 +33,8 @@ class MaintenanceRecord extends Model
      */
     protected $fillable = [
         'vehicle_id',
-        'catgeory_id',
+        'category_id',
+        'payment_method',
         'cost',
         'paid_at',
         'related_date',
@@ -45,6 +48,8 @@ class MaintenanceRecord extends Model
      */
     protected $dates = [
         'deleted_at',
+        'paid_at',
+        'related_date',
     ];
 
     /**
@@ -61,17 +66,27 @@ class MaintenanceRecord extends Model
      */
     public function vehicle()
     {
-        return $this->belongsTo('App\Models\Vehicle', 'vehicle_id');
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 
     /**
-     * Get the catgeory for this model.
+     * Get the category for this model.
      *
-     * @return App\Models\MaintenanceCatgeory
+     * @return App\Models\MaintenanceCategory
      */
-    public function catgeory()
+    public function category()
     {
-        return $this->belongsTo('App\Models\MaintenanceCatgeory', 'catgeory_id');
+        return $this->belongsTo(MaintenanceCategory::class, 'category_id');
+    }
+
+    /**
+     * Get the category for this model.
+     *
+     * @return App\Models\MaintenanceCategory
+     */
+    public function payableChecks()
+    {
+        return $this->hasMany(PayableCheck::class, 'expense_id');
     }
 
     /**
@@ -82,7 +97,7 @@ class MaintenanceRecord extends Model
      */
     public function setPaidAtAttribute($value)
     {
-        $this->attributes['paid_at'] = !empty($value) ? \DateTime::createFromFormat(config('app.datetime_out_format'), $value) : null;
+        $this->attributes['paid_at'] = !empty($value) ? \DateTime::createFromFormat(config('app.date_out_format'), $value) : null;
     }
 
     /**
@@ -97,36 +112,29 @@ class MaintenanceRecord extends Model
     }
 
     /**
-     * Get paid_at in array format
+     * Create a new instance of MaintenanceRecord model
      *
-     * @param  string  $value
-     * @return array
-     */
-    public function getPaidAtAttribute($value)
-    {
-        return \DateTime::createFromFormat(config('app.datetime_out_format'), $value);
-    }
-
-    /**
-     * Get related_date in array format
+     * @param  int  $vehicleId
+     * @param  int  $categoryId
+     * @param  string  $paymentMethod
+     * @param  double  $cost
+     * @param  Carbon\Carbon  $paidAt
+     * @param  string  $notes
      *
-     * @param  string  $value
-     * @return array
+     * @return App\Model\MaintenanceRecord
      */
-    public function getRelatedDateAttribute($value)
+    public static function whipOut($vehicleId, $categoryId, $paymentMethod, $cost, $paidAt, $relatedDate, $notes)
     {
-        return \DateTime::createFromFormat(config('app.date_out_format'), $value);
-    }
+        $record = new MaintenanceRecord();
 
-    /**
-     * Get deleted_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDeletedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat(config('app.datetime_out_format'), $value);
-    }
+        $record->vehicle_id = $vehicleId;
+        $record->category_id = $categoryId;
+        $record->payment_method = $paymentMethod;
+        $record->cost = $cost;
+        $record->paid_at = $paidAt;
+        $record->related_date = $relatedDate;
+        $record->notes = $notes;
 
+        return $record;
+    }
 }

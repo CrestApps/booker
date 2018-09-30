@@ -174,16 +174,16 @@
                 "en": "Status",
                 "ar": "Status"
             },
-            "html-type": "text",
+            "html-type": "select",
             "css-class": "",
             "options": {
                 "en": {
-                    "not cashed": "Not Cashed",
+                    "received": "Received",
                     "cleared": "Cleared",
                     "bounced": "Bounced"
                 },
                 "ar": {
-                    "not cashed": "Not Cashed",
+                    "received": "Received",
                     "cleared": "Cleared",
                     "bounced": "Bounced"
                 }
@@ -222,12 +222,12 @@
         {
             "name": "reservation_id",
             "labels": "Reservation",
-            "html-type": "select",
+            "html-type": "text",
             "css-class": "",
             "options": {},
             "html-value": null,
             "validation": "",
-            "is-on-index": true,
+            "is-on-index": false,
             "is-on-show": true,
             "is-on-form": true,
             "data-type": "int",
@@ -255,7 +255,7 @@
                     "App\\Models\\Reservation",
                     "reservation_id"
                 ],
-                "field": "created_at"
+                "field": "id"
             },
             "foreign-constraint": null,
             "on-store": null,
@@ -271,18 +271,18 @@
     "table-name": null,
     "protection": {
         "is-model-protected": true,
-        "is-controller-protected": false,
+        "is-controller-protected": true,
         "is-api-resource-protected": false,
         "is-api-resource-collection-protected": false,
         "is-api-documentation-protected": false,
         "is-api-documentation-controller-protected": false,
         "is-form-request-protected": false,
         "is-languages-protected": false,
-        "is-form-view-protected": false,
-        "is-index-view-protected": false,
-        "is-create-view-protected": false,
-        "is-edit-view-protected": false,
-        "is-show-view-protected": false
+        "is-form-view-protected": true,
+        "is-index-view-protected": true,
+        "is-create-view-protected": true,
+        "is-edit-view-protected": true,
+        "is-show-view-protected": true
     },
     "api-documentation": []
 }

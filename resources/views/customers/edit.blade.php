@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="panel panel-default">
-  
+
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
@@ -35,9 +35,7 @@
             <form method="POST" action="{{ route('customers.customer.update', $customer->id) }}" id="edit_customer_form" name="edit_customer_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('customers.form', [
-                                        'customer' => $customer,
-                                      ])
+            @include ('customers.edit_form', ['customer' => $customer])
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">

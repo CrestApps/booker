@@ -69,7 +69,7 @@ class ReservationPickupsController extends Controller
         if ($reservation->total_rent > $totalPayment) {
             // At this point we know there is still an outstanding balance
             // reject the transaction
-            return back()->withErrors(['error_message', trans('reservation.balance_should_be_0_before_continue')]);
+            return back()->withErrors(['error_message', trans('reservations.balance_should_be_0_before_continue')]);
         }
 
         $reservation->total_paid_in_cash = $this->sumPayments($payments, 'cash');
@@ -89,7 +89,7 @@ class ReservationPickupsController extends Controller
                 $dueDate = Carbon::createFromFormat('j/n/Y', $payment['due_date']);
 
                 if ($payment['method'] == 'check') {
-                    $check = Check::make($reservation->id, $reservation->primary_driver_id, $payment['amount'], $dueDate);
+                    $check = Check::whipOut($reservation->id, $reservation->primary_driver_id, $payment['amount'], $dueDate);
                     $check->save();
 
                     continue;
@@ -99,7 +99,7 @@ class ReservationPickupsController extends Controller
 
                 if (!$credit) {
                     // At this point we need to create a new credit
-                    $credit = Credit::make($reservation->primary_driver_id, $payment['amount']);
+                    $credit = Credit::whipOut($reservation->primary_driver_id, $payment['amount']);
                 } else {
                     // We add the amount to the existsing credit;
                     $credit->amount += $payment['amount'];
@@ -108,13 +108,13 @@ class ReservationPickupsController extends Controller
                 $credit->save();
 
                 // Add relation to the credit
-                $creditRelation = ReservationToCredit::make($reservation->id, $payment['amount'], $dueDate, $credit->id);
+                $creditRelation = ReservationToCredit::whipOut($reservation->id, $payment['amount'], $dueDate, $credit->id);
                 $creditRelation->save();
             }
         }, 3);
 
         return redirect()->route('reservation_pickups.reservation_pickup.index')
-            ->with('success_message', trans('reservation.pickup_was_successful'));
+            ->with('success_message', trans('reservations.pickup_was_successful'));
     }
 
     /**

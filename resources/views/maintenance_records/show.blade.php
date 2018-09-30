@@ -22,7 +22,7 @@
                     <a href="{{ route('maintenance_records.maintenance_record.create') }}" class="btn btn-success" title="{{ trans('maintenance_records.create') }}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    
+
                     <a href="{{ route('maintenance_records.maintenance_record.edit', $maintenanceRecord->id ) }}" class="btn btn-primary" title="{{ trans('maintenance_records.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
@@ -41,14 +41,16 @@
         <dl class="dl-horizontal">
             <dt>{{ trans('maintenance_records.vehicle_id') }}</dt>
             <dd>{{ optional($maintenanceRecord->vehicle)->name }}</dd>
-            <dt>{{ trans('maintenance_records.catgeory_id') }}</dt>
-            <dd>{{ optional($maintenanceRecord->catgeory)->name }}</dd>
+            <dt>{{ trans('maintenance_records.category_id') }}</dt>
+            <dd>{{ optional($maintenanceRecord->category)->name }}</dd>
+            <dt>Payment Method</dt>
+            <dd>{{ $maintenanceRecord->payment_method }}</dd>
             <dt>{{ trans('maintenance_records.cost') }}</dt>
             <dd>{{ $maintenanceRecord->cost }}</dd>
             <dt>{{ trans('maintenance_records.paid_at') }}</dt>
-            <dd>{{ $maintenanceRecord->paid_at }}</dd>
+            <dd>{{ $maintenanceRecord->paid_at->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('maintenance_records.related_date') }}</dt>
-            <dd>{{ $maintenanceRecord->related_date }}</dd>
+            <dd>{{ $maintenanceRecord->related_date->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('maintenance_records.notes') }}</dt>
             <dd>{{ $maintenanceRecord->notes }}</dd>
 

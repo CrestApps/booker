@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="panel panel-default">
-  
+    <div class="panel panel-default" id="maintenance_records_edit_page">
+
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
@@ -35,9 +35,7 @@
             <form method="POST" action="{{ route('maintenance_records.maintenance_record.update', $maintenanceRecord->id) }}" id="edit_maintenance_record_form" name="edit_maintenance_record_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('maintenance_records.form', [
-                                        'maintenanceRecord' => $maintenanceRecord,
-                                      ])
+            @include ('maintenance_records.form', ['maintenanceRecord' => $maintenanceRecord])
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">

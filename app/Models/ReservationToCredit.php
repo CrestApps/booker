@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Model\Credit;
-use App\Model\Reservation;
+use App\Models\Credit;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -66,17 +66,6 @@ class ReservationToCredit extends Model
     }
 
     /**
-     * Set the due_date.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setDueDateAttribute($value)
-    {
-        $this->attributes['due_date'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
-    }
-
-    /**
      * Get the reservation for this model.
      *
      * @return App\Models\Reservation
@@ -96,7 +85,7 @@ class ReservationToCredit extends Model
      *
      * @return App\Models\ReservationToCredit
      */
-    public static function make($reservationId, $amount, $dueDate, $creditId)
+    public static function whipOut($reservationId, $amount, $dueDate, $creditId)
     {
         $relation = new ReservationToCredit();
         $relation->reservation_id = $reservationId;

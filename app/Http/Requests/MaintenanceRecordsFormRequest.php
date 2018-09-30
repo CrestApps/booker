@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class MaintenanceRecordsFormRequest extends FormRequest
 {
@@ -25,30 +25,35 @@ class MaintenanceRecordsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'vehicle_id' => 'required',
-            'catgeory_id' => 'required',
-            'cost' => 'nullable|numeric|min:-9999999.999|max:9999999.999',
-            'paid_at' => 'required|date_format:j/n/Y g:i A',
+            'vehicle_id' => 'required|integer|min:1',
+            'category_id' => 'required|integer|min:1',
+            'payment_method' => 'string|in:checks,cash',
+            'cost' => 'required|numeric|min:-9999999.999|max:9999999.999',
+            'checks' => 'required_if:payment_method,checks|array',
+            'checks.*.id' => 'nullable|integer|min:1|max:9999999',
+            'checks.*.number' => 'nullable|required_if:payment_method,checks|integer|min:1|max:9999999',
+            'checks.*.value' => 'nullable|required_if:payment_method,checks|numeric|min:1|max:9999999.999',
+            'checks.*.due_date' => 'nullable|required_if:payment_method,checks|date_format:j/n/Y',
+            'paid_at' => 'required|date_format:j/n/Y',
             'related_date' => 'required|date_format:j/n/Y',
             'notes' => 'nullable|string|min:0|max:1000',
         ];
 
         return $rules;
     }
-    
+
     /**
-     * Get the request's data from the request.
+     * Handle a failed validation attempt.
      *
-     * 
-     * @return array
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function getData()
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
-        $data = $this->only(['vehicle_id', 'catgeory_id', 'cost', 'paid_at', 'related_date', 'notes']);
-
-
-
-        return $data;
+        dd($validator->failed());
     }
 
 }

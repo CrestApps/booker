@@ -175,7 +175,7 @@
 
                                         <!-- Remaining ballance -->
                                         <div class="col-md-3 pl-0 pr-5">
-                                            <input class="form-control" id="remaining_balance" type="text" value="{{ $reservation->total_rent }}" data-due="{{ $reservation->total_rent }}" max="0" disabled/>
+                                            <input class="form-control force-validaion" id="remaining_balance" type="text" value="{{ $reservation->total_rent }}" data-due="{{ $reservation->total_rent }}" min="0" max="0" readonly="readonly" />
                                         </div>
 
                                         <!-- Gab filler -->

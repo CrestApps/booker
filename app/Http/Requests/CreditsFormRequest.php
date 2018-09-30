@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Auth;
 
 class CreditsFormRequest extends FormRequest
 {
@@ -14,7 +14,7 @@ class CreditsFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -27,7 +27,6 @@ class CreditsFormRequest extends FormRequest
         $rules = [
             'customer_id' => 'required',
             'amount' => 'required|numeric|min:-9999999.999|max:9999999.999',
-            'due_date' => 'required|date_format:j/n/Y',
         ];
 
         return $rules;
@@ -41,7 +40,7 @@ class CreditsFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['customer_id', 'amount', 'due_date']);
+        $data = $this->only(['customer_id', 'amount']);
 
 
 

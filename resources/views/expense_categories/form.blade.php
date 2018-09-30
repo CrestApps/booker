@@ -1,9 +1,9 @@
 
-<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-    <label for="title" class="col-md-2 control-label">{{ trans('expense_categories.title') }}</label>
+<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+    <label for="name" class="col-md-2 control-label">{{ trans('expense_categories.name') }}</label>
     <div class="col-md-10">
-        <input class="form-control" name="title" type="text" id="title" value="{{ old('title', optional($expenseCategory)->title) }}" minlength="1" maxlength="255" required="true">
-        {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+        <input class="form-control" name="name" type="text" id="name" value="{{ old('name', optional($expenseCategory)->name) }}" minlength="1" maxlength="255" required="true">
+        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

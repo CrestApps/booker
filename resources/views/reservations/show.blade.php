@@ -22,7 +22,7 @@
                     <a href="{{ route('reservations.reservation.create') }}" class="btn btn-success" title="{{ trans('reservations.create') }}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    
+
                     <a href="{{ route('reservations.reservation.edit', $reservation->id ) }}" class="btn btn-primary" title="{{ trans('reservations.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
@@ -41,12 +41,20 @@
         <dl class="dl-horizontal">
             <dt>{{ trans('reservations.primary_driver_id') }}</dt>
             <dd>{{ optional($reservation->primaryDriver)->fullname }}</dd>
+
+            <dt>{{ trans('reservations.additional_drivers') }}</dt>
+            <dd>
+                @foreach($reservation->additionalDrivers as $driver)
+                <p class="mb-2">{{ $driver->fullname }}</p>
+                @endforeach
+            </dd>
+
             <dt>{{ trans('reservations.vehicle_id') }}</dt>
             <dd>{{ optional($reservation->vehicle)->name }}</dd>
             <dt>{{ trans('reservations.reserved_from') }}</dt>
-            <dd>{{ $reservation->reserved_from }}</dd>
+            <dd>{{ $reservation->reserved_from->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('reservations.reserved_to') }}</dt>
-            <dd>{{ $reservation->reserved_to }}</dd>
+            <dd>{{ $reservation->reserved_to->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('reservations.total_override') }}</dt>
             <dd>{{ $reservation->total_override }}</dd>
             <dt>{{ trans('reservations.total_rent') }}</dt>

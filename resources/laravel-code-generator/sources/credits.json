@@ -135,18 +135,18 @@
     "table-name": null,
     "protection": {
         "is-model-protected": true,
-        "is-controller-protected": false,
+        "is-controller-protected": true,
         "is-api-resource-protected": false,
         "is-api-resource-collection-protected": false,
         "is-api-documentation-protected": false,
         "is-api-documentation-controller-protected": false,
         "is-form-request-protected": false,
         "is-languages-protected": false,
-        "is-form-view-protected": false,
-        "is-index-view-protected": false,
-        "is-create-view-protected": false,
-        "is-edit-view-protected": false,
-        "is-show-view-protected": false
+        "is-form-view-protected": true,
+        "is-index-view-protected": true,
+        "is-create-view-protected": true,
+        "is-edit-view-protected": true,
+        "is-show-view-protected": true
     },
     "api-documentation": []
 }

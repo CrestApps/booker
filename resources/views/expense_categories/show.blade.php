@@ -6,7 +6,7 @@
     <div class="panel-heading clearfix">
 
         <span class="pull-left">
-            <h4 class="mt-5 mb-5">{{ isset($expenseCategory->title) ? $expenseCategory->title : 'Expense Category' }}</h4>
+            <h4 class="mt-5 mb-5">{{ isset($expenseCategory->name) ? $expenseCategory->name : 'Expense Category' }}</h4>
         </span>
 
         <div class="pull-right">
@@ -39,8 +39,8 @@
 
     <div class="panel-body">
         <dl class="dl-horizontal">
-            <dt>{{ trans('expense_categories.title') }}</dt>
-            <dd>{{ $expenseCategory->title }}</dd>
+            <dt>{{ trans('expense_categories.name') }}</dt>
+            <dd>{{ $expenseCategory->name }}</dd>
             <dt>{{ trans('expense_categories.sort') }}</dt>
             <dd>{{ $expenseCategory->sort }}</dd>
 

@@ -19,11 +19,7 @@
                         <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     </a>
 
-                    <a href="{{ route('checks.check.create') }}" class="btn btn-success" title="{{ trans('checks.create') }}">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </a>
-                    
-                    <a href="{{ route('checks.check.edit', $check->id ) }}" class="btn btn-primary" title="{{ trans('checks.edit') }}">
+                    <a href="{{ route('checks.check.edit', $check->id ) }}" class="btn btn-warning" title="{{ trans('checks.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
 
@@ -44,11 +40,11 @@
             <dt>{{ trans('checks.total') }}</dt>
             <dd>{{ $check->total }}</dd>
             <dt>{{ trans('checks.due_date') }}</dt>
-            <dd>{{ $check->due_date }}</dd>
+            <dd>{{ optional($check->due_date)->format(config('app.date_out_format')) }}</dd>
             <dt>{{ trans('checks.status') }}</dt>
             <dd>{{ $check->status }}</dd>
             <dt>Reservation</dt>
-            <dd>{{ optional($check->reservation)->created_at }}</dd>
+            <dd>{{ optional($check->reservation)->id }}</dd>
 
         </dl>
 

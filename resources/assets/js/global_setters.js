@@ -16,11 +16,12 @@ $(function(){
     $.validator.setDefaults({
         errorElement: "span",
         errorClass: "help-block",
+        ignore: ":hidden:not('.force-validaion'), .ignore",
         highlight: function (element, errorClass, validClass) {
-            $(element).closest('.form-group').addClass('has-error');
+            $(element).closest('.form-group,.error-wrapper').addClass('has-error');
         },
         unhighlight: function (element, errorClass, validClass) {
-            $(element).closest('.form-group').removeClass('has-error');
+            $(element).closest('.form-group,.error-wrapper').removeClass('has-error');
         },
         errorPlacement: function (error, element) {
             if (element.parent('.input-group').length) 
@@ -35,30 +36,6 @@ $(function(){
             }
         }
     });
-    // Add the required elements
-    /*
-    $('.date-picker, .datetime-picker, .time-picker').each(function (i, item) {
-        var picker = $(item);
-        
-        if (!picker.hasClass('datetimepicker-input')) {
-            picker.addClass('datetimepicker-input');
-        }
-    
-        var id = picker.prop('id');
-        if (!id) {
-            id = Math.random().toString(36).substr(10);
-            picker.prop('id', id);
-        }
-
-        if (!picker.data('target')) {
-            picker.prop('data-target', '#' + id);
-        }
-
-        if (!picker.data('toggle')) {
-            picker.prop('data-toggle', 'datetimepicker');
-        }
-    });
-    */
 
     // Initilize datetime picker
     $(document).on('focus', '.datetime-picker', function(){

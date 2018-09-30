@@ -30,6 +30,8 @@ class ReservationsFormRequest extends FormRequest
             'reserved_from' => 'required|date_format:j/n/Y',
             'reserved_to' => 'required|date_format:j/n/Y',
             'total_override' => 'nullable|numeric|min:-9999999.999|max:9999999.999',
+            'additional_drivers' => 'nullable|array',
+            'additional_drivers.*' => 'integer',
         ];
 
         return $rules;

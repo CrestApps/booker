@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Check;
+use App\Models\Credit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreditPayment extends Model
 {
-
     use SoftDeletes;
 
     /**
@@ -32,6 +33,7 @@ class CreditPayment extends Model
     protected $fillable = [
         'credit_id',
         'amount',
+        'payment_method',
     ];
 
     /**
@@ -57,9 +59,18 @@ class CreditPayment extends Model
      */
     public function credit()
     {
-        return $this->belongsTo('App\Models\Credit', 'credit_id');
+        return $this->belongsTo(Credit::class, 'credit_id');
     }
 
+    /**
+     * Get the credit for this model.
+     *
+     * @return App\Models\Check
+     */
+    public function check()
+    {
+        return $this->belongsTo(Check::class, 'check_id');
+    }
     /**
      * Create a new instance of the model
      *
@@ -70,7 +81,7 @@ class CreditPayment extends Model
      *
      * @return App\Models\CreditPayment
      */
-    public static function make($creditId, $amount, $method, $checkId = null)
+    public static function whipOut($creditId, $amount, $method, $checkId = null)
     {
         $payment = new CreditPayment();
         $payment->credit_id = $creditId;

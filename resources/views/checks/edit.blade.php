@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="panel panel-default">
-  
+
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
@@ -13,10 +13,6 @@
 
                 <a href="{{ route('checks.check.index') }}" class="btn btn-primary" title="{{ trans('checks.show_all') }}">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </a>
-
-                <a href="{{ route('checks.check.create') }}" class="btn btn-success" title="{{ trans('checks.create') }}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
 
             </div>

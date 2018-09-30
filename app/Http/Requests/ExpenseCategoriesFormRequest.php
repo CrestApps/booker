@@ -25,7 +25,7 @@ class ExpenseCategoriesFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'title' => 'required|string|min:1|max:255',
+            'name' => 'required|string|min:1|max:255',
             'sort' => 'nullable|numeric|min:-2147483648|max:2147483647',
         ];
 
@@ -40,7 +40,7 @@ class ExpenseCategoriesFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['title', 'sort']);
+        $data = $this->only(['name', 'sort']);
 
 
 

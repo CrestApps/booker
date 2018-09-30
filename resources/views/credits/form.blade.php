@@ -23,11 +23,3 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('due_date') ? 'has-error' : '' }}">
-    <label for="due_date" class="col-md-2 control-label">{{ trans('credits.due_date') }}</label>
-    <div class="col-md-10">
-        <input class="form-control date-picker" name="due_date" type="text" id="due_date" value="{{ old('due_date', optional($credit)->due_date) }}" required="true">
-        {!! $errors->first('due_date', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-

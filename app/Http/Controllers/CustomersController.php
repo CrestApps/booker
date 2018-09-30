@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomersFormRequest;
 use App\Models\Customer;
 use Exception;
+use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
@@ -14,21 +15,23 @@ class CustomersController extends Controller
      *
      * @return void
      */
-	public function __construct()
-	{
-	    $this->middleware('auth');
-	}
-	
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the customers.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::paginate(25);
+        $term = $request->get('term');
 
-        return view('customers.index', compact('customers'));
+        $customers = Customer::search($term)->paginate(25);
+
+        return view('customers.index', compact('customers', 'term'));
     }
 
     /**
@@ -38,8 +41,6 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        
-        
         return view('customers.create');
     }
 
@@ -53,9 +54,9 @@ class CustomersController extends Controller
     public function store(CustomersFormRequest $request)
     {
         try {
-            
+
             $data = $request->getData();
-            
+
             Customer::create($data);
 
             return redirect()->route('customers.customer.index')
@@ -91,7 +92,6 @@ class CustomersController extends Controller
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);
-        
 
         return view('customers.edit', compact('customer'));
     }
@@ -107,9 +107,8 @@ class CustomersController extends Controller
     public function update($id, CustomersFormRequest $request)
     {
         try {
-            
             $data = $request->getData();
-            
+
             $customer = Customer::findOrFail($id);
             $customer->update($data);
 
@@ -119,7 +118,7 @@ class CustomersController extends Controller
 
             return back()->withInput()
                 ->withErrors(['unexpected_error' => trans('customers.unexpected_error')]);
-        }        
+        }
     }
 
     /**
@@ -143,7 +142,5 @@ class CustomersController extends Controller
                 ->withErrors(['unexpected_error' => trans('customers.unexpected_error')]);
         }
     }
-
-
 
 }

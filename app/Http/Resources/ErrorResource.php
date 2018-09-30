@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ErrorResource extends JsonResource
 {
     private $errorMessage;
+
     /**
      * Create a new controller instance.
      *

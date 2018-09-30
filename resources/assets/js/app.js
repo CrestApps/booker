@@ -18,6 +18,8 @@ require('./helpers');
 require('./global_setters');
 require('./add_reservation');
 require('./pickup_reservation');
+require('./create_maintenance_records');
+require('./credits');
 
 $(function(){
 

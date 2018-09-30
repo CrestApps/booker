@@ -12,49 +12,34 @@
                     <span class="glyphicon glyphicon-remove"></span>
                 </div>
 
-                <div class="btn btn-default" id="add_new_customer" data-toggle="modal" data-target="#add_customer_dialog">
+                <div class="btn btn-default" id="add_new_customer">
                     <span class="glyphicon glyphicon-plus"></span>
                 </div>
             </div>
         </div>
-        <input type="hidden" id="primary_driver_id" name="primary_driver_id" value="" required="true">
+        <input type="hidden" id="primary_driver_id" name="primary_driver_id" value="" required="true" class="force-validaion">
     </div>
 </div>
 
 <div class="form-group">
-    <label for="additional_drive" class="col-md-2 control-label">{{ trans('reservations.additional_drivers') }}</label>
+    <label for="additional_driver" class="col-md-2 control-label">{{ trans('reservations.additional_drivers') }}</label>
     <div class="col-md-10">
 
-        <div class="row input-max-width">
-            <div class="col-sm-11 pr-0">
-                <ul class="list-group">
-                  <li class="list-group-item clearfix">
-                    First Driver
-                    <div class="btn btn-xs btn-danger pull-right remove-additional-driver">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        <div class="input-max-width">
+
+            <div class="input-group">
+                <input type="text" class="form-control" id="additional_driver" name="additional_driver" value="" placeholder="{{ trans('reservations.additional_drivers') }}">
+
+                <div class="input-group-btn">
+                    <div class="btn btn-default" id="add_additional_drive">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
                     </div>
-                    <input type="hidden" name="additional_drivers[]" value="">
-                  </li>
-
-                  <li class="list-group-item clearfix">
-                    Second Driver
-                    <div class="btn btn-xs btn-danger pull-right remove-additional-driver">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </div>
-                    <input type="hidden" name="additional_drivers[]" value="">
-                  </li>
-
-
-                </ul>
-
-
-            </div>
-
-            <div class="col-sm-1 pl-5 " style="vertical-align: middle">
-                <div class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span>
                 </div>
             </div>
+
+            <ul class="list-group list-group-sm mt-2" id="additional_driver_container">
+                <!-- Placeholder to list all additional drivers -->
+            </ul>
 
         </div>
 

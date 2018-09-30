@@ -29,7 +29,20 @@
             </div>
 
         </div>
-        
+
+        <div class="panel-footer clearfix">
+            <div class="pull-right">
+                <form method="GET" action="{{ route('customers.customer.search') }}" accept-charset="UTF-8" class="form-inline">
+                    <div class="form-group">
+                       <label for="search_term" class="sr-only">Search for:</label>
+                       <input type="text" name="term" class="form-control" id="search_term" value="{{ old('term', $term) }}" placeholder="Search customer...">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+            </div>
+        </div>
+
         @if(count($customers) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('customers.none_available') }}</h4>
@@ -77,7 +90,7 @@
                                     </div>
 
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -90,8 +103,8 @@
         <div class="panel-footer">
             {!! $customers->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

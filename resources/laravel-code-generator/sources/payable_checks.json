@@ -294,7 +294,7 @@
     "auto-manage-created-and-updated-at": true,
     "table-name": null,
     "protection": {
-        "is-model-protected": false,
+        "is-model-protected": true,
         "is-controller-protected": false,
         "is-api-resource-protected": false,
         "is-api-resource-collection-protected": false,

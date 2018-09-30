@@ -151,9 +151,9 @@ class Reservation extends Model
      */
     public function scopeOrder($query)
     {
-        return $query->orderBy('reserved_from', 'desc')
-            ->orderBy('reserved_to', 'desc')
-            ->orderByRaw("CASE status WHEN 'completed' THEN 3 WHEN 'in-progress' THEN 2 ELSE 1 END ASC");
+        return $query->orderByRaw("CASE status WHEN 'completed' THEN 3 WHEN 'in-progress' THEN 2 ELSE 1 END ASC")
+            ->orderBy('reserved_from', 'desc')
+            ->orderBy('reserved_to', 'desc');
     }
 
     /**
@@ -170,7 +170,7 @@ class Reservation extends Model
      *
      * @return App\Model\Reservation
      */
-    public static function make(Carbon $from, Carbon $to, $primaryDriveId, $vehicleId, $totalOverride, $totalDays, $totalRent, $status = 'Scheduled')
+    public static function whipOut(Carbon $from, Carbon $to, $primaryDriveId, $vehicleId, $totalOverride, $totalDays, $totalRent, $status = 'Scheduled')
     {
         $reservation = new Reservation();
         $reservation->reserved_from = $from;

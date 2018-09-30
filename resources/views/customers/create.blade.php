@@ -5,7 +5,7 @@
     <div class="panel panel-default">
 
         <div class="panel-heading clearfix">
-            
+
             <span class="pull-left">
                 <h4 class="mt-5 mb-5">{{ trans('customers.create') }}</h4>
             </span>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="panel-body">
-        
+
             @if ($errors->any())
                 <ul class="alert alert-danger">
                     @foreach ($errors->all() as $error)
@@ -30,9 +30,7 @@
 
             <form method="POST" action="{{ route('customers.customer.store') }}" accept-charset="UTF-8" id="create_customer_form" name="create_customer_form" class="form-horizontal">
             {{ csrf_field() }}
-            @include ('customers.form', [
-                                        'customer' => null,
-                                      ])
+            @include ('customers.create_form', ['customer' => null,])
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -46,5 +44,3 @@
     </div>
 
 @endsection
-
-

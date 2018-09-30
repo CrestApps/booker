@@ -1,9 +1,11 @@
 <?php
 
 return [
+    'make_payment' => 'Make Payment',
+    'save' => 'Save',
+    'edit_payment' => 'Edit Payment',
     'customer_id' => 'Customer',
     'amount' => 'Amount',
-    'due_date' => 'Due Date',
     'create' => 'Create New Credit',
     'delete' => 'Delete Credit',
     'edit' => 'Edit Credit',
