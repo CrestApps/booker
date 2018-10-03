@@ -23,6 +23,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Language setter
 Route::post('languages/set', 'LanguagesController@set')->name('languages.set');
 
+// reports
+Route::group([
+    'prefix' => 'reports',
+], function () {
+    Route::get('/assets', 'ReportsController@assets')
+        ->name('reports.report.assets');
+
+    Route::get('/top_customers', 'ReportsController@topCustomers')
+        ->name('reports.report.top_customers');
+
+/*
+Route::get('/assets', 'ReportsController@assets')
+->name('reports.report.assets');
+
+Route::post('/assets', 'ReportsController@showAssets')
+->name('reports.report.show_assets');
+ */
+
+});
+
 // asset categories
 Route::group([
     'prefix' => 'asset_categories',
@@ -360,6 +380,10 @@ Route::group([
         ->where('id', '[0-9]+');
     Route::post('/process/{id}', 'ReservationPickupsController@process')
         ->name('reservation_pickups.reservation_pickup.process');
+
+    Route::get('/processed/{id}', 'ReservationPickupsController@processed')
+        ->name('reservation_pickups.reservation_pickup.processed')
+        ->where('id', '[0-9]+');
 });
 
 Route::group([
@@ -372,6 +396,10 @@ Route::group([
         ->where('id', '[0-9]+');
     Route::post('/process/{id}', 'ReservationDropoffsController@process')
         ->name('reservation_dropoffs.reservation_dropoff.process')
+        ->where('id', '[0-9]+');
+
+    Route::get('/processed/{id}', 'ReservationDropoffsController@processed')
+        ->name('reservation_dropoffs.reservation_dropoff.processed')
         ->where('id', '[0-9]+');
 });
 

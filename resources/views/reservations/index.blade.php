@@ -76,6 +76,17 @@
                                         <button type="submit" class="btn btn-danger" title="{{ trans('reservations.delete') }}" onclick="return confirm(&quot;{{ trans('reservations.confirm_delete') }}&quot;)">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
+
+                                        @if($reservation->status == 'in-progress')
+                                        <a href="{{ route('reservation_pickups.reservation_pickup.processed', $reservation->id ) }}" class="btn btn-warning" title="{{ trans('reservations.print') }}">
+                                            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                                        </a>
+                                        @elseif($reservation->status == 'completed')
+                                        <a href="{{ route('reservation_dropoffs.reservation_dropoff.processed', $reservation->id ) }}" class="btn btn-warning" title="{{ trans('reservations.print') }}">
+                                            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                                        </a>
+                                        @endif
+
                                     </div>
 
                                 </form>

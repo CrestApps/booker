@@ -1,3 +1,6 @@
+
+
+
 <ul class="sidebar-nav">
 
     <li class="sidebar-brand">
@@ -100,5 +103,23 @@
             {{ trans('vehicles.model_plural') }}
         </a>
     </li>
+
+    <li class="sidebar-brand">
+        {{ trans('reports.reports') }}
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.assets') }}">
+            {{ trans('reports.assets_report') }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.top_customers') }}">
+            {{ trans('reports.top_customers_report') }}
+        </a>
+    </li>
+
+
 
 </ul>

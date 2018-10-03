@@ -1,11 +1,9 @@
 <?php
 
-use Carbon\Carbon;
-
 if (!function_exists('makeCarbon')) {
     function makeCarbon($obj, $format)
     {
-        if ($obj instanceof Carbon) {
+        if ($obj instanceof \DateTime) {
             return $obj;
         }
 
@@ -47,7 +45,7 @@ if (!function_exists('carbonFromTime')) {
 if (!function_exists('toFormat')) {
     function toFormat($obj, $format)
     {
-        if ($obj instanceof Carbon) {
+        if ($obj instanceof \DateTime) {
             return $obj->format($format);
         }
 

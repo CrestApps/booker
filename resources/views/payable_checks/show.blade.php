@@ -47,8 +47,6 @@
             <dd>{{ $payableCheck->due_date }}</dd>
             <dt>{{ trans('payable_checks.issue_date') }}</dt>
             <dd>{{ $payableCheck->issue_date }}</dd>
-            <dt>{{ trans('payable_checks.expense_id') }}</dt>
-            <dd>{{ optional($payableCheck->expense)->id }}</dd>
             <dt>{{ trans('payable_checks.is_cashed') }}</dt>
             <dd>{{ ($payableCheck->is_cashed) ? 'Yes' : 'No' }}</dd>
 

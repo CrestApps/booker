@@ -29,7 +29,6 @@ class PayableChecksFormRequest extends FormRequest
             'value' => 'required|numeric|min:1|max:9999999.999',
             'due_date' => 'required|date_format:j/n/Y',
             'issue_date' => 'required|date_format:j/n/Y',
-            'expense_id' => 'required',
             'is_cashed' => 'boolean',
         ];
 
@@ -44,7 +43,7 @@ class PayableChecksFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['number', 'value', 'due_date', 'issue_date', 'expense_id', 'is_cashed']);
+        $data = $this->only(['number', 'value', 'due_date', 'issue_date', 'is_cashed']);
 
         $data['is_cashed'] = $this->has('is_cashed');
 

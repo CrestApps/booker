@@ -12,6 +12,8 @@ import 'jquery-ui/ui/widgets/autocomplete.js';
 window.validator = require('jquery-validation');
 window.moment = require('moment-timezone');
 window.datetimepicker = require('../../../bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js');
+window.print = require('../../../bower_components/jQuery.print/dist/jQuery.print.min.js');
+
 
 require('./settings');
 require('./helpers');
@@ -20,6 +22,7 @@ require('./add_reservation');
 require('./pickup_reservation');
 require('./create_maintenance_records');
 require('./credits');
+require('./print_contract')
 
 $(function(){
 

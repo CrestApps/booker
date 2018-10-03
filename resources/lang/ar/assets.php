@@ -4,6 +4,7 @@ return [
     'name' => 'Name',
     'category_id' => 'Category',
     'cost' => 'Cost',
+    'title' => 'Title',
     'purchased_at' => 'Purchased At',
     'notes' => 'Notes',
     'create' => 'Create New Asset',

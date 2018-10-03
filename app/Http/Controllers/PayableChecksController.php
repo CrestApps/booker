@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PayableChecksFormRequest;
-use App\Models\Expense;
 use App\Models\PayableCheck;
 use Exception;
 
@@ -15,11 +14,11 @@ class PayableChecksController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	}
+	
     /**
      * Display a listing of the payable checks.
      *
@@ -39,9 +38,9 @@ class PayableChecksController extends Controller
      */
     public function create()
     {
-        $expenses = Expense::pluck('id', 'id')->all();
-
-        return view('payable_checks.create', compact('expenses'));
+        
+        
+        return view('payable_checks.create');
     }
 
     /**
@@ -54,9 +53,9 @@ class PayableChecksController extends Controller
     public function store(PayableChecksFormRequest $request)
     {
         try {
-
+            
             $data = $request->getData();
-
+            
             PayableCheck::create($data);
 
             return redirect()->route('payable_checks.payable_check.index')
@@ -77,7 +76,7 @@ class PayableChecksController extends Controller
      */
     public function show($id)
     {
-        $payableCheck = PayableCheck::with('expense')->findOrFail($id);
+        $payableCheck = PayableCheck::findOrFail($id);
 
         return view('payable_checks.show', compact('payableCheck'));
     }
@@ -92,9 +91,9 @@ class PayableChecksController extends Controller
     public function edit($id)
     {
         $payableCheck = PayableCheck::findOrFail($id);
-        $expenses = Expense::pluck('id', 'id')->all();
+        
 
-        return view('payable_checks.edit', compact('payableCheck', 'expenses'));
+        return view('payable_checks.edit', compact('payableCheck'));
     }
 
     /**
@@ -108,8 +107,9 @@ class PayableChecksController extends Controller
     public function update($id, PayableChecksFormRequest $request)
     {
         try {
+            
             $data = $request->getData();
-
+            
             $payableCheck = PayableCheck::findOrFail($id);
             $payableCheck->update($data);
 
@@ -119,7 +119,7 @@ class PayableChecksController extends Controller
 
             return back()->withInput()
                 ->withErrors(['unexpected_error' => trans('payable_checks.unexpected_error')]);
-        }
+        }        
     }
 
     /**
@@ -143,5 +143,7 @@ class PayableChecksController extends Controller
                 ->withErrors(['unexpected_error' => trans('payable_checks.unexpected_error')]);
         }
     }
+
+
 
 }

@@ -29,7 +29,7 @@
             </div>
 
         </div>
-        
+
         @if(count($payableChecks) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('payable_checks.none_available') }}</h4>
@@ -55,8 +55,8 @@
                         <tr>
                             <td>{{ $payableCheck->number }}</td>
                             <td>{{ $payableCheck->value }}</td>
-                            <td>{{ $payableCheck->due_date }}</td>
-                            <td>{{ $payableCheck->issue_date }}</td>
+                            <td>{{ toDateFormat($payableCheck->due_date) }}</td>
+                            <td>{{ toDateFormat($payableCheck->issue_date) }}</td>
                             <td>{{ ($payableCheck->is_cashed) ? 'Yes' : 'No' }}</td>
 
                             <td>
@@ -79,7 +79,7 @@
                                     </div>
 
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -92,8 +92,8 @@
         <div class="panel-footer">
             {!! $payableChecks->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

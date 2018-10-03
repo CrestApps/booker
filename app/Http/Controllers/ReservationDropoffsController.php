@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Vehicle;
 use Carbon\Carbon;
 use DB;
+use Exception;
 
 class ReservationDropoffsController extends Controller
 {
@@ -113,8 +114,28 @@ class ReservationDropoffsController extends Controller
         });
 
         // At this point we need record payment againt the credit if any
-        return redirect()->route('reservation_dropoffs.reservation_dropoff.index')
+        return redirect()->route('reservation_dropoffs.reservation_dropoff.processed')
             ->with('success_message', trans('reservation.pickup_was_successful'));
+    }
+
+    /**
+     * Show the reservation after completion/dropoff.
+     *
+     * @param int $id
+     *
+     * @return Illuminate\View\View
+     */
+    public function processed($id)
+    {
+        $reservation = Reservation::with('primaryDriver')->findOrFail($id);
+
+        if ($reservation->status != 'completed') {
+            throw new Exception('The reservation is not in-progress');
+        }
+
+        $languages = config('app.locales');
+
+        return view('reservation_dropoffs.processed', compact('reservation', 'languages'));
     }
 
     /**

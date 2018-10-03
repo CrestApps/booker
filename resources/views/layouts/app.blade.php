@@ -9,10 +9,10 @@
     <title>{{ trans('lang.app_name') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    <link rel="stylesheet" media="all" href="{{ mix('/css/app.css') }}">
 
     @if(trans('lang.dir') == 'rtl')
-        <link rel="stylesheet" href="{!! asset('css/bootstrap-flipped.min.css') !!}">
+        <link rel="stylesheet" media="all" href="{!! asset('css/bootstrap-flipped.min.css') !!}">
     @endif
 
 </head>

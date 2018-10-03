@@ -49,6 +49,8 @@ class Reservation extends Model
     protected $dates = [
         'reserved_from',
         'reserved_to',
+        'picked_up_at',
+        'dropped_off_at',
     ];
 
     /**
@@ -96,50 +98,6 @@ class Reservation extends Model
     public function creditRelation()
     {
         return $this->hasOne(ReservationToCredit::class);
-    }
-
-    /**
-     * Set the picked_up_at.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setPickedUpAtAttribute($value)
-    {
-        $this->attributes['picked_up_at'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
-    }
-
-    /**
-     * Set the dropped_off_at.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setDroppedOffAtAttribute($value)
-    {
-        $this->attributes['dropped_off_at'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
-    }
-
-    /**
-     * Get picked_up_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getPickedUpAtAttribute($value)
-    {
-        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
-    }
-
-    /**
-     * Get dropped_off_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDroppedOffAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
     }
 
     /**

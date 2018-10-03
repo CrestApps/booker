@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\ReservationToCredit;
 use Carbon\Carbon;
 use DB;
+use Exception;
 use Illuminate\Http\Request;
 
 class ReservationPickupsController extends Controller
@@ -136,6 +137,23 @@ class ReservationPickupsController extends Controller
         });
 
         return $total;
+    }
+
+    /**
+     * Show the reservation after completion/dropoff.
+     *
+     * @param int $id
+     *
+     * @return Illuminate\View\View
+     */
+    public function processed($id)
+    {
+        $reservation = Reservation::with('primaryDriver')->findOrFail($id);
+
+        if ($reservation->status != 'in-progress') {
+            throw new Exception('The reservation is not yet completed');
+        }
+        return view('reservation_pickups.processed', compact('reservation'));
     }
 
     /**
