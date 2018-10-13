@@ -108,7 +108,7 @@ return [
     'datetime_out_format' => 'j/n/Y g:i A',
     'date_out_format' => 'j/n/Y',
     'time_out_format' => 'g:i A',
-
+    'month_out_format' => 'm/Y',
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

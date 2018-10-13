@@ -43,6 +43,9 @@ class VehiclesFormRequest extends FormRequest
             'vin_number' => 'required|string|min:1|max:60',
             'licence_plate' => 'required|string|min:1|max:30',
             'purchase_cost' => 'nullable|numeric|min:-9999999.999|max:9999999.999',
+            'purchased_date' => 'date_format:j/n/Y|nullable',
+            'sold_date' => 'date_format:j/n/Y|nullable',
+            'sold_amount' => 'string|min:1|nullable',
         ];
 
         return $rules;
@@ -56,7 +59,7 @@ class VehiclesFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['name', 'size_id', 'brand_id', 'model', 'year', 'color', 'last_oil_change', 'miles_to_oil_change', 'current_miles', 'registration_experation_on', 'insurance_experation_on', 'daily_rate', 'weekly_rate', 'monthly_rate', 'is_active', 'vin_number', 'licence_plate', 'purchase_cost']);
+        $data = $this->only(['name', 'size_id', 'brand_id', 'model', 'year', 'color', 'last_oil_change', 'miles_to_oil_change', 'current_miles', 'registration_experation_on', 'insurance_experation_on', 'daily_rate', 'weekly_rate', 'monthly_rate', 'is_active', 'vin_number', 'licence_plate', 'purchase_cost', 'purchased_date', 'sold_date', 'sold_amount']);
 
         $data['is_active'] = $this->has('is_active');
 

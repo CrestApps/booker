@@ -2,7 +2,7 @@
 
 return [
     'category_id' => 'Category',
-    'related_date' => 'Related Month',
+    'related_date' => 'Related Date',
     'amount' => 'Amount',
     'notes' => 'Notes',
     'create' => 'Create New Expense',

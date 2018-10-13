@@ -18,7 +18,7 @@
 			    </option>
 			@endforeach
         </select>
-        
+
         {!! $errors->first('category_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="form-group {{ $errors->has('purchased_at') ? 'has-error' : '' }}">
     <label for="purchased_at" class="col-md-2 control-label">{{ trans('assets.purchased_at') }}</label>
     <div class="col-md-10">
-        <input class="form-control datetime-picker" name="purchased_at" type="text" id="purchased_at" value="{{ old('purchased_at', optional($asset)->purchased_at) }}" required="true" placeholder="Enter purchased at here...">
+        <input class="form-control datetime-picker" name="purchased_at" type="text" id="purchased_at" value="{{ toDateTimeFormat(old('purchased_at', optional($asset)->purchased_at)) }}" required="true" placeholder="Enter purchased at here...">
         {!! $errors->first('purchased_at', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -46,4 +46,3 @@
         {!! $errors->first('notes', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-

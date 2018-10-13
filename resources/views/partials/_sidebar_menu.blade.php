@@ -120,6 +120,40 @@
         </a>
     </li>
 
+    <li>
+        <a href="{{ route('reports.report.vehicle_usage') }}">
+            {{ trans('reports.vehicle_usage') }}
+        </a>
+    </li>
 
+    <li>
+        <a href="{{ route('reports.report.maintenance') }}">
+            {{ trans('reports.maintenance') }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.revenue_and_exprenses') }}">
+            {{ trans('reports.revenue_and_exprenses') }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.cash_flow') }}">
+            {{ trans('reports.cash_flow') }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.profit_loss_by_vehicle') }}">
+            {{ trans('reports.profit_loss_by_vehicle') }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('reports.report.cost_analysis') }}">
+            {{ trans('reports.cost_analysis') }}
+        </a>
+    </li>
 
 </ul>

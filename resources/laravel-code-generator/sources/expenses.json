@@ -76,7 +76,7 @@
                     "App\\Models\\ExpenseCategory",
                     "category_id"
                 ],
-                "field": "Name"
+                "field": "name"
             },
             "foreign-constraint": null,
             "on-store": null,
@@ -95,7 +95,7 @@
             "css-class": "month-picker",
             "options": {},
             "html-value": null,
-            "validation": "required|date_format:n/Y|date_format:j/n/Y",
+            "validation": "required|date_format:m/Y",
             "is-on-index": true,
             "is-on-show": true,
             "is-on-form": true,
@@ -112,7 +112,7 @@
             "is-auto-increment": false,
             "is-inline-options": false,
             "is-date": false,
-            "date-format": "j/n/Y",
+            "date-format": "m/Y",
             "cast-as": "",
             "placeholder": {},
             "delimiter": "; ",
@@ -135,14 +135,14 @@
             "css-class": "",
             "options": {},
             "html-value": null,
-            "validation": "required|numeric|min:-9999999.999|max:9999999.999",
+            "validation": "required|numeric|min:0.01|max:9999999.999",
             "is-on-index": true,
             "is-on-show": true,
             "is-on-form": true,
             "data-type": "decimal",
             "data-type-params": [
                 10,
-                3
+                2
             ],
             "data-value": null,
             "is-index": false,
@@ -253,7 +253,7 @@
     "auto-manage-created-and-updated-at": true,
     "table-name": null,
     "protection": {
-        "is-model-protected": false,
+        "is-model-protected": true,
         "is-controller-protected": false,
         "is-api-resource-protected": false,
         "is-api-resource-collection-protected": false,

@@ -48,6 +48,9 @@ class Vehicle extends Model
         'vin_number',
         'licence_plate',
         'purchase_cost',
+        'purchased_date',
+        'sold_date',
+        'sold_amount',
     ];
 
     /**
@@ -104,7 +107,7 @@ class Vehicle extends Model
      */
     public function setLastOilChangeAttribute($value)
     {
-        $this->attributes['last_oil_change'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
+        $this->attributes['last_oil_change'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
     }
 
     /**
@@ -115,7 +118,7 @@ class Vehicle extends Model
      */
     public function setRegistrationExperationOnAttribute($value)
     {
-        $this->attributes['registration_experation_on'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
+        $this->attributes['registration_experation_on'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
     }
 
     /**
@@ -126,7 +129,29 @@ class Vehicle extends Model
      */
     public function setInsuranceExperationOnAttribute($value)
     {
-        $this->attributes['insurance_experation_on'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
+        $this->attributes['insurance_experation_on'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
+    }
+
+    /**
+     * Set the purchased_date.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPurchasedDateAttribute($value)
+    {
+        $this->attributes['purchased_date'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
+    }
+
+    /**
+     * Set the sold_date.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setSoldDateAttribute($value)
+    {
+        $this->attributes['sold_date'] = !empty($value) ? \DateTime::createFromFormat('[% date_format %]', $value) : null;
     }
 
     /**
@@ -137,7 +162,7 @@ class Vehicle extends Model
      */
     public function getLastOilChangeAttribute($value)
     {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
     }
 
     /**
@@ -148,7 +173,7 @@ class Vehicle extends Model
      */
     public function getRegistrationExperationOnAttribute($value)
     {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
     }
 
     /**
@@ -159,18 +184,29 @@ class Vehicle extends Model
      */
     public function getInsuranceExperationOnAttribute($value)
     {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y g:i A');
     }
 
     /**
-     * Get deleted_at in array format
+     * Get purchased_date in array format
      *
      * @param  string  $value
      * @return array
      */
-    public function getDeletedAtAttribute($value)
+    public function getPurchasedDateAttribute($value)
     {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y');
+    }
+
+    /**
+     * Get sold_date in array format
+     *
+     * @param  string  $value
+     * @return array
+     */
+    public function getSoldDateAttribute($value)
+    {
+        return \DateTime::createFromFormat($this->getDateFormat(), $value)->format('j/n/Y');
     }
 
     /**
@@ -185,12 +221,10 @@ class Vehicle extends Model
         if ($days >= 30) {
             return $this->monthly_rate;
         }
-
         if ($days >= 7) {
             return $this->weekly_rate;
         }
 
         return $this->daily_rate;
     }
-
 }

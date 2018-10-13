@@ -286,18 +286,18 @@ textarea,
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 30px;
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #000;
+    color: #636B82;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #000;
+    color: #636B82;
     background: #D3E0E9;
 }
 
@@ -307,18 +307,19 @@ textarea,
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    color: #636B82;
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: #636B82;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
     background: none;
-    color: #999999;
+    color: #636B82;
     cursor: auto;
 }
 
@@ -343,12 +344,6 @@ textarea,
         width: 250px;
     }
 
-    /*
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-    */
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;

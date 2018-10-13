@@ -65,6 +65,17 @@ class Check extends Model
     }
 
     /**
+     * Set the due_date.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setDueDateAttribute($value)
+    {
+        $this->attributes['due_date'] = carbonFromDate($value);
+    }
+
+    /**
      * Makes a new instance of the model
      *
      * @param int $reservationId

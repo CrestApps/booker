@@ -22,7 +22,7 @@
                     <a href="{{ route('vehicles.vehicle.create') }}" class="btn btn-success" title="{{ trans('vehicles.create') }}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-
+                    
                     <a href="{{ route('vehicles.vehicle.edit', $vehicle->id ) }}" class="btn btn-primary" title="{{ trans('vehicles.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
@@ -41,7 +41,7 @@
         <dl class="dl-horizontal">
             <dt>{{ trans('vehicles.name') }}</dt>
             <dd>{{ $vehicle->name }}</dd>
-            <dt>{{ trans('vehicles.size') }}</dt>
+            <dt>{{ trans('vehicles.size_id') }}</dt>
             <dd>{{ optional($vehicle->size)->name }}</dd>
             <dt>{{ trans('vehicles.brand_id') }}</dt>
             <dd>{{ optional($vehicle->brand)->name }}</dd>
@@ -75,6 +75,12 @@
             <dd>{{ $vehicle->licence_plate }}</dd>
             <dt>{{ trans('vehicles.purchase_cost') }}</dt>
             <dd>{{ $vehicle->purchase_cost }}</dd>
+            <dt>Purchased Date</dt>
+            <dd>{{ $vehicle->purchased_date }}</dd>
+            <dt>Sold Date</dt>
+            <dd>{{ $vehicle->sold_date }}</dd>
+            <dt>Sold Amount</dt>
+            <dd>{{ $vehicle->sold_amount }}</dd>
 
         </dl>
 

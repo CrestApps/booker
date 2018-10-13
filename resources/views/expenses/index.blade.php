@@ -52,7 +52,7 @@
                     <tbody>
                     @foreach($expenses as $expense)
                         <tr>
-                            <td>{{ optional($expense->category)->Name }}</td>
+                            <td>{{ optional($expense->category)->name }}</td>
                             <td>{{ $expense->related_date }}</td>
                             <td>{{ $expense->amount }}</td>
                             <td>{{ $expense->pay_date }}</td>

@@ -22,7 +22,7 @@
                     <a href="{{ route('assets.asset.create') }}" class="btn btn-success" title="{{ trans('assets.create') }}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    
+
                     <a href="{{ route('assets.asset.edit', $asset->id ) }}" class="btn btn-primary" title="{{ trans('assets.edit') }}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
@@ -46,7 +46,7 @@
             <dt>{{ trans('assets.cost') }}</dt>
             <dd>{{ $asset->cost }}</dd>
             <dt>{{ trans('assets.purchased_at') }}</dt>
-            <dd>{{ $asset->purchased_at }}</dd>
+            <dd>{{ toDateTimeFormat($asset->purchased_at) }}</dd>
             <dt>{{ trans('assets.notes') }}</dt>
             <dd>{{ $asset->notes }}</dd>
 

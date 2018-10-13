@@ -39,7 +39,7 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        $categories = ExpenseCategory::pluck('Name','id')->all();
+        $categories = ExpenseCategory::pluck('name','id')->all();
         
         return view('expenses.create', compact('categories'));
     }
@@ -92,7 +92,7 @@ class ExpensesController extends Controller
     public function edit($id)
     {
         $expense = Expense::findOrFail($id);
-        $categories = ExpenseCategory::pluck('Name','id')->all();
+        $categories = ExpenseCategory::pluck('name','id')->all();
 
         return view('expenses.edit', compact('expense','categories'));
     }

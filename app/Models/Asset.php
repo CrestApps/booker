@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Asset extends Model
 {
-    
-    use SoftDeletes;
 
+    use SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -19,10 +18,10 @@ class Asset extends Model
     protected $table = 'assets';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -31,12 +30,12 @@ class Asset extends Model
      * @var array
      */
     protected $fillable = [
-                  'name',
-                  'category_id',
-                  'cost',
-                  'purchased_at',
-                  'notes'
-              ];
+        'name',
+        'category_id',
+        'cost',
+        'purchased_at',
+        'notes',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -44,16 +43,17 @@ class Asset extends Model
      * @var array
      */
     protected $dates = [
-               'deleted_at'
-           ];
-    
+        'deleted_at',
+        'purchased_at',
+    ];
+
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [];
-    
+
     /**
      * Get the category for this model.
      *
@@ -61,7 +61,7 @@ class Asset extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\AssetCategory','category_id');
+        return $this->belongsTo('App\Models\AssetCategory', 'category_id');
     }
 
     /**
@@ -72,29 +72,6 @@ class Asset extends Model
      */
     public function setPurchasedAtAttribute($value)
     {
-        $this->attributes['purchased_at'] = !empty($value) ? \DateTime::createFromFormat($this->getDateFormat(), $value) : null;
+        $this->attributes['purchased_at'] = !empty($value) ? \DateTime::createFromFormat('j/n/Y g:i A', $value) : null;
     }
-
-    /**
-     * Get purchased_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getPurchasedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-    }
-
-    /**
-     * Get deleted_at in array format
-     *
-     * @param  string  $value
-     * @return array
-     */
-    public function getDeletedAtAttribute($value)
-    {
-        return \DateTime::createFromFormat('j/n/Y g:i A', $value);
-    }
-
 }

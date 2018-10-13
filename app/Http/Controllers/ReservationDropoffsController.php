@@ -114,8 +114,8 @@ class ReservationDropoffsController extends Controller
         });
 
         // At this point we need record payment againt the credit if any
-        return redirect()->route('reservation_dropoffs.reservation_dropoff.processed')
-            ->with('success_message', trans('reservation.pickup_was_successful'));
+        return redirect()->route('reservation_dropoffs.reservation_dropoff.processed', ['id' => $id])
+            ->with('success_message', trans('reservation.dropoff_was_successful'));
     }
 
     /**

@@ -64,7 +64,7 @@ class AssetsController extends Controller
         } catch (Exception $exception) {
 
             return back()->withInput()
-                ->withErrors(['unexpected_error' => trans('assets.unexpected_error')]);
+                ->withErrors(['unexpected_error' => trans('assets.unexpected_error') . ' ' . $exception->getMessage()]);
         }
     }
 
@@ -92,6 +92,7 @@ class AssetsController extends Controller
     public function edit($id)
     {
         $asset = Asset::findOrFail($id);
+
         $categories = AssetCategory::pluck('name', 'id')->all();
 
         return view('assets.edit', compact('asset', 'categories'));

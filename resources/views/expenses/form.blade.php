@@ -26,7 +26,7 @@
 <div class="form-group {{ $errors->has('amount') ? 'has-error' : '' }}">
     <label for="amount" class="col-md-2 control-label">{{ trans('expenses.amount') }}</label>
     <div class="col-md-10">
-        <input class="form-control" name="amount" type="number" id="amount" value="{{ old('amount', optional($expense)->amount) }}" min="-9999999" max="9999999" required="true" step="any">
+        <input class="form-control" name="amount" type="number" id="amount" value="{{ old('amount', optional($expense)->amount) }}" min="0" max="9999999" required="true" step="any">
         {!! $errors->first('amount', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

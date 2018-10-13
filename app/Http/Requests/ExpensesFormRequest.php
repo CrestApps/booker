@@ -26,8 +26,8 @@ class ExpensesFormRequest extends FormRequest
     {
         $rules = [
             'category_id' => 'required',
-            'related_date' => 'required|date_format:n/Y|date_format:j/n/Y',
-            'amount' => 'required|numeric|min:-9999999.999|max:9999999.999',
+            'related_date' => 'required|date_format:m/Y',
+            'amount' => 'required|numeric|min:0.01|max:9999999.999',
             'pay_date' => 'required|date_format:j/n/Y',
             'notes' => 'nullable|string|min:0|max:1000',
         ];

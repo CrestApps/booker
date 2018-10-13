@@ -12,5 +12,6 @@ return [
     'average_rent' => 'Average Rent',
     'total_rent' => 'Total Rent',
     'top_customers_report' => 'Top Customers',
+    'vehicle_usage' => 'Vehicle Usage',
 
 ];

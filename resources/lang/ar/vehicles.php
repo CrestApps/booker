@@ -2,6 +2,7 @@
 
 return [
     'name' => 'Name',
+    'size_id' => 'Size',
     'brand_id' => 'Brand',
     'model' => 'Model',
     'year' => 'Year',

@@ -29,7 +29,7 @@
             </div>
 
         </div>
-        
+
         @if(count($assets) == 0)
             <div class="panel-body text-center">
                 <h4>{{ trans('assets.none_available') }}</h4>
@@ -55,7 +55,7 @@
                             <td>{{ $asset->name }}</td>
                             <td>{{ optional($asset->category)->name }}</td>
                             <td>{{ $asset->cost }}</td>
-                            <td>{{ $asset->purchased_at }}</td>
+                            <td>{{ toDateTimeFormat($asset->purchased_at) }}</td>
 
                             <td>
 
@@ -77,7 +77,7 @@
                                     </div>
 
                                 </form>
-                                
+
                             </td>
                         </tr>
                     @endforeach
@@ -90,8 +90,8 @@
         <div class="panel-footer">
             {!! $assets->render() !!}
         </div>
-        
+
         @endif
-    
+
     </div>
 @endsection

@@ -27,19 +27,42 @@ Route::post('languages/set', 'LanguagesController@set')->name('languages.set');
 Route::group([
     'prefix' => 'reports',
 ], function () {
+
     Route::get('/assets', 'ReportsController@assets')
         ->name('reports.report.assets');
 
     Route::get('/top_customers', 'ReportsController@topCustomers')
         ->name('reports.report.top_customers');
 
-/*
-Route::get('/assets', 'ReportsController@assets')
-->name('reports.report.assets');
+    Route::get('/vehicle_usage', 'ReportsController@vehicleUsage')
+        ->name('reports.report.vehicle_usage');
+    Route::post('/vehicle_usage', 'ReportsController@showVehicleUsage')
+        ->name('reports.report.show_vehicle_usage');
 
-Route::post('/assets', 'ReportsController@showAssets')
-->name('reports.report.show_assets');
- */
+    Route::get('/maintenance', 'ReportsController@maintenance')
+        ->name('reports.report.maintenance');
+    Route::post('/maintenance', 'ReportsController@showMaintenance')
+        ->name('reports.report.show_maintenance');
+
+    Route::get('/revenue_and_exprenses', 'ReportsController@revenueAndExprenses')
+        ->name('reports.report.revenue_and_exprenses');
+    Route::post('/revenue_and_exprenses', 'ReportsController@showRevenueAndExprenses')
+        ->name('reports.report.show_revenue_and_exprenses');
+
+    Route::get('/cash_flow', 'ReportsController@cashFlow')
+        ->name('reports.report.cash_flow');
+    Route::post('/cash_flow', 'ReportsController@showCashFlow')
+        ->name('reports.report.show_cash_flow');
+
+    Route::get('/profit_loss_by_vehicle', 'ReportsController@profitLossByVehicle')
+        ->name('reports.report.profit_loss_by_vehicle');
+    Route::post('/profit_loss_by_vehicle', 'ReportsController@showProfitLossByVehicle')
+        ->name('reports.report.show_profit_loss_by_vehicle');
+
+    Route::get('/cost_analysis', 'ReportsController@costAnalysis')
+        ->name('reports.report.cost_analysis');
+    Route::post('/cost_analysis', 'ReportsController@showCostAnalysis')
+        ->name('reports.report.show_cost_analysis');
 
 });
 

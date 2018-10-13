@@ -59,7 +59,8 @@ class ReservationsController extends Controller
                 $from = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_from']);
                 $to = Carbon::createFromFormat(config('app.date_out_format'), $data['reserved_to']);
                 $totalDays = $from->diffInDays($to) ?: 1;
-                $rate = $this->getRate($data['vehicle_id'], $totalDays);
+                $vehicle = Vehicle::findOrFail($data['vehicle_id']);
+                $rate = $vehicle->getRate($totalDays);
                 $totalRent = $rate * $totalDays + doubleval($data['total_override']);
 
                 $reservation = Reservation::whipOut($from, $to, $data['primary_driver_id'], $data['vehicle_id'], $data['total_override'], $totalDays, $totalRent);
@@ -80,7 +81,7 @@ class ReservationsController extends Controller
         } catch (Exception $exception) {
 
             return back()->withInput()
-                ->withErrors(['unexpected_error' => trans('reservations.unexpected_error')]);
+                ->withErrors(['unexpected_error' => trans('reservations.unexpected_error') . ' ' . $exception->getMessage()]);
         }
     }
 
@@ -168,20 +169,5 @@ class ReservationsController extends Controller
             return back()->withInput()
                 ->withErrors(['unexpected_error' => trans('reservations.unexpected_error')]);
         }
-    }
-
-    /**
-     * Gets the calulated rate
-     *
-     * @param int $vehicleId
-     * @param int $days
-     *
-     * @return double
-     **/
-    protected function getRate($vehicleId, $days)
-    {
-        $vehicle = Vehicle::findOrFail($vehicleId);
-
-        return $vehicle->getRate($days);
     }
 }

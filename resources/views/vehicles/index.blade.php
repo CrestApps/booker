@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <th>{{ trans('vehicles.name') }}</th>
-                            <th>Size</th>
+                            <th>{{ trans('vehicles.size_id') }}</th>
                             <th>{{ trans('vehicles.brand_id') }}</th>
                             <th>{{ trans('vehicles.model') }}</th>
                             <th>{{ trans('vehicles.last_oil_change') }}</th>
@@ -55,6 +55,9 @@
                             <th>{{ trans('vehicles.monthly_rate') }}</th>
                             <th>{{ trans('vehicles.is_active') }}</th>
                             <th>{{ trans('vehicles.purchase_cost') }}</th>
+                            <th>Purchased Date</th>
+                            <th>Sold Date</th>
+                            <th>Sold Amount</th>
 
                             <th></th>
                         </tr>
@@ -76,6 +79,9 @@
                             <td>{{ $vehicle->monthly_rate }}</td>
                             <td>{{ ($vehicle->is_active) ? 'Yes' : 'No' }}</td>
                             <td>{{ $vehicle->purchase_cost }}</td>
+                            <td>{{ $vehicle->purchased_date }}</td>
+                            <td>{{ $vehicle->sold_date }}</td>
+                            <td>{{ $vehicle->sold_amount }}</td>
 
                             <td>
 

@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group {{ $errors->has('size_id') ? 'has-error' : '' }}">
-    <label for="size_id" class="col-md-2 control-label">Size</label>
+    <label for="size_id" class="col-md-2 control-label">{{ trans('vehicles.size_id') }}</label>
     <div class="col-md-10">
         <select class="form-control" id="size_id" name="size_id" required="true">
         	    <option value="" style="display: none;" {{ old('size_id', optional($vehicle)->size_id ?: '') == '' ? 'selected' : '' }} disabled selected>Please select a size</option>
@@ -162,6 +162,30 @@
     <div class="col-md-10">
         <input class="form-control" name="purchase_cost" type="number" id="purchase_cost" value="{{ old('purchase_cost', optional($vehicle)->purchase_cost) }}" min="-9999999" max="9999999" step="any">
         {!! $errors->first('purchase_cost', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('purchased_date') ? 'has-error' : '' }}">
+    <label for="purchased_date" class="col-md-2 control-label">Purchased Date</label>
+    <div class="col-md-10">
+        <input class="form-control date-picker" name="purchased_date" type="text" id="purchased_date" value="{{ old('purchased_date', optional($vehicle)->purchased_date) }}" placeholder="Enter purchased date here...">
+        {!! $errors->first('purchased_date', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('sold_date') ? 'has-error' : '' }}">
+    <label for="sold_date" class="col-md-2 control-label">Sold Date</label>
+    <div class="col-md-10">
+        <input class="form-control date-picker" name="sold_date" type="text" id="sold_date" value="{{ old('sold_date', optional($vehicle)->sold_date) }}" placeholder="Enter sold date here...">
+        {!! $errors->first('sold_date', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('sold_amount') ? 'has-error' : '' }}">
+    <label for="sold_amount" class="col-md-2 control-label">Sold Amount</label>
+    <div class="col-md-10">
+        <input class="form-control" name="sold_amount" type="text" id="sold_amount" value="{{ old('sold_amount', optional($vehicle)->sold_amount) }}" minlength="1" placeholder="Enter sold amount here...">
+        {!! $errors->first('sold_amount', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

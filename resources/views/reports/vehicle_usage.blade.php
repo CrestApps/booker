@@ -18,7 +18,7 @@
 
         <div class="panel-heading clearfix">
 
-            <form method="POST" action="{{ route('reports.report.show_assets') }}" accept-charset="UTF-8" class="form-inline">
+            <form method="POST" action="{{ route('reports.report.show_vehicle_usage') }}" accept-charset="UTF-8" class="form-inline">
 	            {{ csrf_field() }}
 	            @include ('reports._range')
 
@@ -30,13 +30,13 @@
 
         </div>
 
-        @if(!isset($assets))
+        @if(!isset($records))
         <div class="panel-body">
             <div class="panel-body text-center">
                 <h4>{{ trans('reports.use_the_filters_above_to_start') }}</h4>
             </div>
         </div>
-        @elseif(count($assets) == 0)
+        @elseif(count($records) == 0)
         <div class="panel-body">
             <div class="panel-body text-center">
                 <h4>{{ trans('reports.no_available_records') }}</h4>
@@ -49,31 +49,29 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>{{ trans('assets.title') }}</th>
-                            <th class="text-center">{{ trans('assets.cost') }}</th>
-
-                            <th></th>
+                            <th>{{ trans('vehicles.name') }}</th>
+                            <th class="text-center">{{ trans('reports.average_price') }}</th>
+                            <th class="text-center">{{ trans('reports.total_days_in_service') }}</th>
+                            <th class="text-center">{{ trans('reports.usage_percentage') }}</th>
+                            <th class="text-center">{{ trans('reports.total_days_rented') }}</th>
+                            <th class="text-center">{{ trans('reports.total_income') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @if(isset($assets) && $assets)
-	                    @foreach($assets as $asset)
+                    @if(isset($records) && $records)
+	                    @foreach($records as $record)
 	                        <tr>
-	                            <td>{{ $asset->name }}</td>
-	                            <td class="text-center">{{ $asset->cost }}</td>
+	                            <td>{{ $record->name }}</td>
+	                            <td class="text-center">{{ number_format($record->average_price, 2) }}</td>
+                                <td class="text-center">{{ number_format($record->total_days_in_service, 0)  }}</td>
+                                <td class="text-center">{{ number_format(($record->total_days_rented/$record->total_days_in_service) * 100, 2)  }} %</td>
+                                <td class="text-center">{{ number_format($record->total_days_rented, 0) }}</td>
+                                <td class="text-center">{{ number_format($record->total_income, 2) }}</td>
 	                        </tr>
 	                    @endforeach
                     @endif
                     </tbody>
 
-                    @if(isset($assets) && $assets)
-                    <tfoot>
-                    	<tr>
-                    		<td></td>
-                    		<td class="text-center">{{ $assets->sum('cost') }}</td>
-                    	</tr>
-                    </tfoot>
-                    @endif
                 </table>
 
             </div>

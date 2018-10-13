@@ -112,6 +112,23 @@ class MaintenanceRecord extends Model
     }
 
     /**
+     * Scope a query to include records that belong to the given vehicle id or return all vehicles if no vehicle id provided.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $vehicleId
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeByVehicle($query, $vehicleId)
+    {
+        if (!$vehicleId) {
+            return $query;
+        }
+
+        return $query->where('vehicle_id', $vehicleId);
+    }
+
+    /**
      * Create a new instance of MaintenanceRecord model
      *
      * @param  int  $vehicleId

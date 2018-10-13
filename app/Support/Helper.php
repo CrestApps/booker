@@ -3,7 +3,7 @@
 if (!function_exists('makeCarbon')) {
     function makeCarbon($obj, $format)
     {
-        if ($obj instanceof \DateTime) {
+        if ($obj instanceof Carbon\Carbon) {
             return $obj;
         }
 
@@ -45,7 +45,7 @@ if (!function_exists('carbonFromTime')) {
 if (!function_exists('toFormat')) {
     function toFormat($obj, $format)
     {
-        if ($obj instanceof \DateTime) {
+        if ($obj instanceof Carbon\Carbon) {
             return $obj->format($format);
         }
 
@@ -64,6 +64,13 @@ if (!function_exists('toDateFormat')) {
     function toDateFormat($obj)
     {
         return toFormat($obj, config('app.date_out_format'));
+    }
+}
+
+if (!function_exists('toMonthFormat')) {
+    function toMonthFormat($obj)
+    {
+        return toFormat($obj, config('app.month_out_format'));
     }
 }
 
